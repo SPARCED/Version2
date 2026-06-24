@@ -5,7 +5,7 @@ from pathlib import Path
 
 from config.in_house_file_format import InHouseFilesNames
 
-from datatypes import Compartment, Parameter, Specie
+from datatypes import Compartment, Parameter, Specie, Ratelaw
 
 
 class DataStorage:
@@ -13,11 +13,13 @@ class DataStorage:
         self.compartments: list[Compartment] = []
         self.parameters: list[Parameter] = []
         self.species: list[Specie] = []
+        self.ratelaws: list[Ratelaw] = []
 
         self._loaders = {
                 InHouseFilesNames.COMPARTMENTS: self._add_compartment,
                 InHouseFilesNames.PARAMETERS: self._add_parameter,
-                InHouseFilesNames.SPECIES: self._add_specie
+                InHouseFilesNames.SPECIES: self._add_specie,
+                InHouseFilesNames.RATELAWS: self._add_ratelaw
                 }
 
     def _add_compartment(self, parts: list[str]) -> None:
@@ -29,6 +31,9 @@ class DataStorage:
     def _add_specie(self, parts: list[str]) -> None:
         # TODO solver
         self.species.append(Specie.from_row(parts))
+
+    def _add_ratelaw(self, parts: list[str]) -> None:
+        self.ratelaws.append(Ratelaw.from_row(parts))
 
     def load_in_house_files(self, files: dict[str, list[str | Path]]) -> None:
         for file_type, paths in files.items():

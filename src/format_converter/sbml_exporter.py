@@ -43,6 +43,14 @@ class SBMLExporter:
         return Parameter(
                 sid=getattr(p, "id", None),
                 value=getattr(p, "value", None))
+    
+    def _to_sbmlutils_reactions(self, r: in_house.Reaction) -> Reaction:
+        return Reaction(
+                sid=getattr(r, "id", None),
+                equation=getattr(r, "equation", None).replace(";", "=>"),
+                formula=("(" + getattr(r, "formula", None)+")*"
+                    + getattr(r, "compartment", None) , None)
+                )
 
     def to_sbml(self, data: DataStorage):
         model = Model(
@@ -55,7 +63,8 @@ class SBMLExporter:
                     volume=U.volume),
                 compartments = [self._to_sbmlutils_compartment(c) for c in data.compartments],
                 species = [self._to_sbmlutils_species(s) for s in data.species],
-                parameters = [self._to_sbmlutils_parameters(p) for p in data.parameters]
+                parameters = [self._to_sbmlutils_parameters(p) for p in data.parameters],
+                reactions = [self._to_sbmlutils_reactions(r) for r in data.ratelaws]
                 )
         results = create_model(
                 model=model,

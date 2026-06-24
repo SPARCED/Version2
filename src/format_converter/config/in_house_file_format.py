@@ -41,3 +41,10 @@ SPECIES_COLUMNS = {
         "solver": 3
         }
 
+RATELAWS_COLUMNS = {
+        "reactionId": 0,
+        "compartment": 1,
+        "equation": 2,
+        "ratelaw": 3
+        }
+
