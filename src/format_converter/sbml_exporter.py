@@ -32,13 +32,6 @@ class SBMLExporter:
                 unit=U.volume,
                 value=getattr(c, "value", None))
 
-    def _to_sbmlutils_species(self, s: in_house.Specie) -> Species:
-        return Species(
-                sid=getattr(s, "id", None),
-                initialConcentration=getattr(s, "initial_concentration", None),
-                compartment=getattr(s, "compartment", None),
-                hasOnlySubstanceUnits=False)
-    
     def _to_sbmlutils_parameters(self, p: in_house.Parameter) -> Parameter:
         return Parameter(
                 sid=getattr(p, "id", None),
@@ -51,6 +44,13 @@ class SBMLExporter:
                 formula=("(" + getattr(r, "formula", None)+")*"
                     + getattr(r, "compartment", None) , None)
                 )
+    
+    def _to_sbmlutils_species(self, s: in_house.Specie) -> Species:
+        return Species(
+                sid=getattr(s, "id", None),
+                initialConcentration=getattr(s, "initial_concentration", None),
+                compartment=getattr(s, "compartment", None),
+                hasOnlySubstanceUnits=False)
 
     def to_sbml(self, data: DataStorage):
         model = Model(

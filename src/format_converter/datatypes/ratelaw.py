@@ -20,6 +20,6 @@ class Ratelaw:
                 id=row[c["reactionId"]],
                 compartment=row[c["compartment"]],
                 equation=row[c["equation"]],
-                formula=row[c["ratelaw"]]
+                formula=row[c["formula"]]
                 )
 

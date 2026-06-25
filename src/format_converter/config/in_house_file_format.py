@@ -34,17 +34,17 @@ PARAMETERS_COLUMNS = {
         "estimate": 6
         }
 
+RATELAWS_COLUMNS = {
+        "reactionId": 0,
+        "compartment": 1,
+        "equation": 2,
+        "formula": 3
+        }
+
 SPECIES_COLUMNS = {
         "speciesId": 0,
         "compartment": 1,
         "initialConcentration": 2,
         "solver": 3
-        }
-
-RATELAWS_COLUMNS = {
-        "reactionId": 0,
-        "compartment": 1,
-        "equation": 2,
-        "ratelaw": 3
         }
 
