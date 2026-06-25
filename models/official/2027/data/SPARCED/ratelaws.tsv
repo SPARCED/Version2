@@ -1,4 +1,4 @@
-reactionId	compartment	r ; p	ratelaw
+reactionId	compartment	equation	formula
 vbR	Cytoplasm	; cyt_abs__ribosome_	kbR_1+(kbR_2*((cyt_prot__pT412_KS6B1_1_^kbR_3)/((kbR_4^kbR_3)+(cyt_prot__pT412_KS6B1_1_^kbR_3))))
 vdR	Cytoplasm	cyt_abs__ribosome_ ;	kdR_1*cyt_abs__ribosome_
 vTL1	Nucleus	; nuc_prot_i__P53_	kTL1_1*cyt_mrna__TP53_201_*(cyt_prot__IF4E_1_/(kTL1_2+cyt_prot__IF4E_1_))
