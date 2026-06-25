@@ -1,0 +1,15 @@
+reactionId	parameterId	parameterScale	lowerBound	upperBound	nominalValue	estimate
+vLap1	kLap1_1	lin	1.00E-02	1.00E-02	1.00E-02	0
+vLap1	kLap1_2	lin	5.25E-12	5.25E-12	5.25E-12	0
+vLap1	kLap1_3	lin	8.00E-08	8.00E-08	8.00E-08	0
+vLap2	kLap2_1	lin	1.00E-02	1.00E-02	1.00E-02	0
+vLap3	kLap3_1	lin	1.00E-03	1.00E-03	1.00E-03	0
+vLap4	kLap4_1	lin	2.40E-03	2.40E-03	2.40E-03	0
+vLap5	kLap5_1	lin	1.51E-05	1.51E-05	1.51E-05	0
+vLap6	kLap6_1	lin	1.00E-03	1.00E-03	1.00E-03	0
+vLap7	kLap7_1	lin	7.00E-03	7.00E-03	7.00E-03	0
+vLap8	kLap8_1	lin	1.04E-05	1.04E-05	1.04E-05	0
+vLap9	kLap9_1	lin	1.00E-02	1.00E-02	1.00E-02	0
+vLap10	kLap10_1	lin	5.40E-01	5.40E-01	5.40E-01	0
+vLap11	kLap11_1	lin	0.00E+00	0.00E+00	0.00E+00	0
+
