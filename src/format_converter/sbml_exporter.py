@@ -40,7 +40,7 @@ class SBMLExporter:
     def _to_sbmlutils_reactions(self, r: in_house.Reaction) -> Reaction:
         return Reaction(
                 sid=getattr(r, "id", None),
-                equation=getattr(r, "equation", None).replace(";", "=>"),
+                equation=getattr(r, "equation", None),
                 formula=("(" + getattr(r, "formula", None)+")*"
                     + getattr(r, "compartment", None) , None)
                 )
