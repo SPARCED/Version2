@@ -1,4 +1,4 @@
-speciesId	compartment	initialConcentration (nM)	solver
+speciesId	compartment	initialConcentration	solver
 cyt_abs__ribosome_	Cytoplasm	1897.371866	Deterministic
 nuc_prot_i__P53_	Nucleus	296.618651	Deterministic
 nuc_prot_a__P53_	Nucleus	6.24613433	Deterministic
