@@ -1,0 +1,13 @@
+reactionId	compartment	equation	formula
+vLap1	Extracellular	eq	((kLap1_1*(kLap1_2/kLap1_3))*ext_drug__lapatinib)	
+vLap2	Cytoplasm	eq	kLap2_1
+vLap3	Cytoplasm	eq	kLap3_1
+vLap4	Cytoplasm	eq	kLap4_1
+vLap5	Cytoplasm	eq	kLap5_1
+vLap6	Cytoplasm	eq	kLap6_1
+vLap7	Cytoplasm	eq	kLap7_1
+vLap8	Cytoplasm	eq	kLap8_1
+vLap9	Cytoplasm	eq	kLap9_1
+vLap10	Cytoplasm	eq	kLap10_1
+vLap11	Cytoplasm	eq	kLap11_1
+
