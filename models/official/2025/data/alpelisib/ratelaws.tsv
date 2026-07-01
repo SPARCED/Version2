@@ -1,0 +1,9 @@
+reactionId	compartment	equation	formula
+vAlp1	Extracellular	ext_drug__alpelisib_ => cyt_drug__alpelisib_	((kAlp1_1*(kAlp1_2/kAlp1_3))*ext_drug__alpelisib_)	
+vAlp2	Cytoplasm	cyt_drug__alpelisib_ => ext_drug__alpelisib_	kAlp2_1
+vAlp3	Cytoplasm	cyt_drug__alpelisib_ => cyt_cong__alpelisib__PIK3C_1_	kAlp3_1
+vAlp4	Cytoplasm	cyt_cong__alpelisib__PIK3C_1_ => cyt_drug__alpelisib_	kAlp4_1
+vAlp5	Cytoplasm	cyt_cong__alpelisib__PIK3C_1_ =>	kAlp5_1
+vAlp6	Cytoplasm	cyt_drug__alpelisib_ => cyt_cong__alpelisib__PIK3C__PIK3R_1_	kAlp6_1
+vAlp7	Cytoplasm	cyt_cong__alpelisib__PIK3C__PIK3R_1_ => cyt_drug__alpelisib_	kAlp7_1
+vAlp8	Cytoplasm	cyt_cong__alpelisib__PIK3C__PIK3R_1_ =>	kAlp8_1
