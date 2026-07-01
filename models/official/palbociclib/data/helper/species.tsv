@@ -1,0 +1,2 @@
+speciesId	compartment	initialConcentration	solver
+nuc_cong__CCND__CDK4_	Nucleus	0.00E+00	Deterministic
