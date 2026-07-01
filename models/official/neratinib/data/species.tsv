@@ -1,0 +1,6 @@
+speciesId	compartment	initialConcentration	solver
+ext_drug__neratinib_	Extracellular	0.00E+00	Deterministic
+cyt_drug__neratinib_	Cytoplasm	0.00E+00	Deterministic
+cyt_cong__neratinib__EGFR_1_	Cytoplasm	0.00E+00	Deterministic
+cyt_cong__neratinib__ERBB2_1_	Cytoplasm	0.00E+00	Deterministic
+cyt_cong__neratinib__ERBB4_1_	Cytoplasm	0.00E+00	Deterministic
