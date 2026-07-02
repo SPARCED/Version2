@@ -1,11 +1,7 @@
 reactionId	parameterId	parameterScale	lowerBound	upperBound	nominalValue	estimate
 vPal1	kPal1_1	lin	1.00E-02	1.00E-02	1.00E-02	0
-vPal1	kPal1_2	lin	5.25E-12	5.25E-12	5.25E-12	0
-vPal1	kPal1_3	lin	8.00E-08	8.00E-08	8.00E-08	0
 vPal2	kPal2_1	lin	1.00E-02	1.00E-02	1.00E-02	0
 vPal3	kPal3_1	lin	1.00E-02	1.00E-02	1.00E-02	0
-vPal3	kPal3_2	lin	1.75E-12	1.75E-12	1.75E-12	0
-vPal3	lPal3_3	lin	5.25E-12	5.25E-12	5.25E-12	0
 vPal4	kPal4_1	lin	1.00E-02	1.00E-02	1.00E-01	0
 vPal5	kPal5_1	lin	1.00E-03	1.00E-03	1.00E-03	0
 vPal6	kPal6_1	lin	1.90E-03	1.90E-03	1.90E-03	0

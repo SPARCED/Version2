@@ -86,20 +86,16 @@
       </compartment>
     </listOfCompartments>
     <listOfSpecies>
-      <species id="ext_drug__palbociclib_" compartment="Extracellular" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="cyt_drug__palbociclib_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="nuc_drug__palbociclib_" compartment="Nucleus" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="nuc_cong__palbociclib__CCND__CDK4_" compartment="Nucleus" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="ext_comp__palbociclib_" compartment="Extracellular" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cyt_comp_in__palbociclib_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="nuc_comp_in__palbociclib_" compartment="Nucleus" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="nuc_cong__CCND__CDK4__palbociclib_" compartment="Nucleus" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
       <species id="nuc_cong__CCND__CDK4_" compartment="Nucleus" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
     </listOfSpecies>
     <listOfParameters>
       <parameter id="kPal1_1" value="0.01" constant="true"/>
-      <parameter id="kPal1_2" value="5.25e-12" constant="true"/>
-      <parameter id="kPal1_3" value="8e-08" constant="true"/>
       <parameter id="kPal2_1" value="0.01" constant="true"/>
       <parameter id="kPal3_1" value="0.01" constant="true"/>
-      <parameter id="kPal3_2" value="1.75e-12" constant="true"/>
-      <parameter id="lPal3_3" value="5.25e-12" constant="true"/>
       <parameter id="kPal4_1" value="0.1" constant="true"/>
       <parameter id="kPal5_1" value="0.001" constant="true"/>
       <parameter id="kPal6_1" value="0.0019" constant="true"/>
@@ -108,10 +104,10 @@
     <listOfReactions>
       <reaction id="vPal1" reversible="false">
         <listOfReactants>
-          <speciesReference species="ext_drug__palbociclib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="ext_comp__palbociclib_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="cyt_drug__palbociclib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_comp_in__palbociclib_" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -120,10 +116,10 @@
               <ci> kPal1_1 </ci>
               <apply>
                 <divide/>
-                <ci> kPal1_2 </ci>
-                <ci> kPal1_3 </ci>
+                <ci> Cytoplasm </ci>
+                <ci> Extracellular </ci>
               </apply>
-              <ci> ext_drug__palbociclib_ </ci>
+              <ci> ext_comp__palbociclib_ </ci>
               <ci> Extracellular </ci>
             </apply>
           </math>
@@ -131,10 +127,10 @@
       </reaction>
       <reaction id="vPal2" reversible="false">
         <listOfReactants>
-          <speciesReference species="cyt_drug__palbociclib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_comp_in__palbociclib_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="ext_drug__palbociclib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="ext_comp__palbociclib_" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -148,10 +144,10 @@
       </reaction>
       <reaction id="vPal3" reversible="false">
         <listOfReactants>
-          <speciesReference species="cyt_drug__palbociclib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_comp_in__palbociclib_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="nuc_drug__palbociclib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="nuc_comp_in__palbociclib_" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -160,10 +156,10 @@
               <ci> kPal3_1 </ci>
               <apply>
                 <divide/>
-                <ci> kPal1_2 </ci>
-                <ci> kPal1_3 </ci>
+                <ci> Nucleus </ci>
+                <ci> Cytoplasm </ci>
               </apply>
-              <ci> cyt_drug__palbociclib_ </ci>
+              <ci> cyt_comp_in__palbociclib_ </ci>
               <ci> Cytoplasm </ci>
             </apply>
           </math>
@@ -171,10 +167,10 @@
       </reaction>
       <reaction id="vPal4" reversible="false">
         <listOfReactants>
-          <speciesReference species="nuc_drug__palbociclib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="nuc_comp_in__palbociclib_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="cyt_drug__palbociclib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_comp_in__palbociclib_" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -188,11 +184,11 @@
       </reaction>
       <reaction id="vPal5" reversible="false">
         <listOfReactants>
-          <speciesReference species="nuc_drug__palbociclib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="nuc_comp_in__palbociclib_" stoichiometry="1" constant="true"/>
           <speciesReference species="nuc_cong__CCND__CDK4_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="nuc_cong__palbociclib__CCND__CDK4_" stoichiometry="1" constant="true"/>
+          <speciesReference species="nuc_cong__CCND__CDK4__palbociclib_" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -206,10 +202,10 @@
       </reaction>
       <reaction id="vPal6" reversible="false">
         <listOfReactants>
-          <speciesReference species="nuc_cong__palbociclib__CCND__CDK4_" stoichiometry="1" constant="true"/>
+          <speciesReference species="nuc_cong__CCND__CDK4__palbociclib_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="nuc_drug__palbociclib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="nuc_comp_in__palbociclib_" stoichiometry="1" constant="true"/>
           <speciesReference species="nuc_cong__CCND__CDK4_" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
@@ -224,7 +220,7 @@
       </reaction>
       <reaction id="vPal7" reversible="false">
         <listOfReactants>
-          <speciesReference species="nuc_cong__palbociclib__CCND__CDK4_" stoichiometry="1" constant="true"/>
+          <speciesReference species="nuc_cong__CCND__CDK4__palbociclib_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
