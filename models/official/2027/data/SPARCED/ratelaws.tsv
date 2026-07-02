@@ -1,11 +1,11 @@
-reactionId	compartment	equation	formula  modifiers
+reactionId	compartment	equation	formula
 vbR	Cytoplasm	=> cyt_abs__ribosome_	kbR_1+(kbR_2*((cyt_prot__pT412_KS6B1_1_^kbR_3)/((kbR_4^kbR_3)+(cyt_prot__pT412_KS6B1_1_^kbR_3))))
 vdR	Cytoplasm	cyt_abs__ribosome_ =>	kdR_1*cyt_abs__ribosome_
-vTL1	Nucleus	=> nuc_prot_i__P53_	kTL1_1*cyt_mrna__TP53_201_*(cyt_prot__IF4E_1_/(kTL1_2+cyt_prot__IF4E_1_))  cyt_mrna__TP53_201_;cyt_prot__IF4E_1_
-vTL2	Nucleus	=> nuc_prot__MDM2_1_	(kTL2_1+kTL2_2*nuc_abs__MDM2delay10_)*cyt_mrna__MDM2_202_*(cyt_prot__IF4E_1_/(kTL2_3+cyt_prot__IF4E_1_))  nuc_abs__MDM2delay10_;cyt_mrna__MDM2_202_;cyt_prot__IF4E_1_
-vTL3	Nucleus	=> nuc_prot__PPM1D_1_	kTL3_1*nuc_abs__WIP1delay10_*cyt_mrna__PPM1D_201_*(cyt_prot__IF4E_1_/(kTL3_2+cyt_prot__IF4E_1_))  nuc_abs__WIP1delay10_;cyt_mrna__PPM1D_201_;cyt_prot__IF4E_1_
-vTL4	Cytoplasm	=> nuc_prot_i__ATM_	kTL4_1*cyt_mrna__ATM_229_*(cyt_prot__IF4E_1_/(kTL4_2+cyt_prot__IF4E_1_))  cyt_mrna__ATM_229_;cyt_prot__IF4E_1_
-vTL5	Cytoplasm	=> nuc_prot_i__ATR_1_	kTL5_1*cyt_mrna__ATR_201_*(cyt_prot__IF4E_1_/(kTL5_2+cyt_prot__IF4E_1_))  cyt_mrna__ATR_201_;cyt_prot__IF4E_1_
+vTL1	Nucleus	=> nuc_prot_i__P53_ [cyt_mrna__TP53_201_, cyt_prot__IF4E_1_]  kTL1_1*cyt_mrna__TP53_201_*(cyt_prot__IF4E_1_/(kTL1_2+cyt_prot__IF4E_1_))
+vTL2	Nucleus	=> nuc_prot__MDM2_1_ [nuc_abs__MDM2delay10_, cyt_mrna__MDM2_202_, cyt_prot__IF4E_1_]  (kTL2_1+kTL2_2*nuc_abs__MDM2delay10_)*cyt_mrna__MDM2_202_*(cyt_prot__IF4E_1_/(kTL2_3+cyt_prot__IF4E_1_))
+vTL3	Nucleus	=> nuc_prot__PPM1D_1_ [nuc_abs__WIP1delay10_, cyt_mrna__PPM1D_201_;cyt_prot__IF4E_1_]  kTL3_1*nuc_abs__WIP1delay10_*cyt_mrna__PPM1D_201_*(cyt_prot__IF4E_1_/(kTL3_2+cyt_prot__IF4E_1_))
+vTL4	Cytoplasm	=> nuc_prot_i__ATM_ [cyt_mrna__ATM_229_, cyt_prot__IF4E_1_]  kTL4_1*cyt_mrna__ATM_229_*(cyt_prot__IF4E_1_/(kTL4_2+cyt_prot__IF4E_1_))
+vTL5	Cytoplasm	=> nuc_prot_i__ATR_1_ [cyt_mrna__ATR_201_, cyt_prot__IF4E_1_]  kTL5_1*cyt_mrna__ATR_201_*(cyt_prot__IF4E_1_/(kTL5_2+cyt_prot__IF4E_1_))
 vTL6	Nucleus	=> nuc_prot__RB_	kTL6_1*cyt_mrna__RB1_201_  cyt_mrna__RB1_201_
 vTL7	Nucleus	=> nuc_cong__E2F_	kTL7_1*cyt_mrna__E2F1_201_  cyt_mrna__E2F1_201_
 vTL8	Nucleus	=> nuc_cong__E2F_	kTL8_1*cyt_mrna__E2F2_204_  cyt_mrna__E2F2_204_
