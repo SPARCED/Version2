@@ -86,16 +86,17 @@
       </compartment>
     </listOfCompartments>
     <listOfSpecies>
-      <species id="ext_drug__lapatinib_" compartment="Extracellular" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="cyt_drug__lapatinib_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="cyt_cong__lapatinib__EGFR_1_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="cyt_cong__lapatinib__ERBB2_1_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="cyt_cong__lapatinib__ERBB4_1_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="ext_comp__lapatinib_" compartment="Extracellular" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cyt_comp_in__lapatinib_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cyt_cong__EGFR_1__lapatinib_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cyt_cong__ERBB2_1__lapatinib_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cyt_cong__ERBB4_1__lapatinib_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cyt_prot__EGFR_1_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cyt_prot__ERBB2_1_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cyt_prot__ERBB4_1_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
     </listOfSpecies>
     <listOfParameters>
       <parameter id="kLap1_1" value="0.01" constant="true"/>
-      <parameter id="kLap1_2" value="5.25e-12" constant="true"/>
-      <parameter id="kLap1_3" value="8e-08" constant="true"/>
       <parameter id="kLap2_1" value="0.01" constant="true"/>
       <parameter id="kLap3_1" value="0.001" constant="true"/>
       <parameter id="kLap4_1" value="0.0024" constant="true"/>
@@ -110,10 +111,10 @@
     <listOfReactions>
       <reaction id="vLap1" reversible="false">
         <listOfReactants>
-          <speciesReference species="ext_drug__lapatinib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="ext_comp__lapatinib_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="cyt_drug__lapatinib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_comp_in__lapatinib_" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -122,10 +123,10 @@
               <ci> kLap1_1 </ci>
               <apply>
                 <divide/>
-                <ci> kLap1_2 </ci>
-                <ci> kLap1_3 </ci>
+                <ci> Cytoplasm </ci>
+                <ci> Extracellular </ci>
               </apply>
-              <ci> ext_drug__lapatinib_ </ci>
+              <ci> ext_comp__lapatinib_ </ci>
               <ci> Extracellular </ci>
             </apply>
           </math>
@@ -133,10 +134,10 @@
       </reaction>
       <reaction id="vLap2" reversible="false">
         <listOfReactants>
-          <speciesReference species="cyt_drug__lapatinib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_comp_in__lapatinib_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="ext_drug__lapatinib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="ext_comp__lapatinib_" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -150,10 +151,11 @@
       </reaction>
       <reaction id="vLap3" reversible="false">
         <listOfReactants>
-          <speciesReference species="cyt_drug__lapatinib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_comp_in__lapatinib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_prot__EGFR_1_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="cyt_cong__lapatinib__EGFR_1_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_cong__EGFR_1__lapatinib_" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -167,10 +169,11 @@
       </reaction>
       <reaction id="vLap4" reversible="false">
         <listOfReactants>
-          <speciesReference species="cyt_cong__lapatinib__EGFR_1_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_cong__EGFR_1__lapatinib_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="cyt_drug__lapatinib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_comp_in__lapatinib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_prot__EGFR_1_" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -184,7 +187,7 @@
       </reaction>
       <reaction id="vLap5" reversible="false">
         <listOfReactants>
-          <speciesReference species="cyt_cong__lapatinib__EGFR_1_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_cong__EGFR_1__lapatinib_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -198,10 +201,11 @@
       </reaction>
       <reaction id="vLap6" reversible="false">
         <listOfReactants>
-          <speciesReference species="cyt_drug__lapatinib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_comp_in__lapatinib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_prot__ERBB2_1_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="cyt_cong__lapatinib__ERBB2_1_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_cong__ERBB2_1__lapatinib_" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -215,10 +219,10 @@
       </reaction>
       <reaction id="vLap7" reversible="false">
         <listOfReactants>
-          <speciesReference species="cyt_cong__lapatinib__ERBB2_1_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_cong__ERBB2_1__lapatinib_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="cyt_drug__lapatinib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_comp_in__lapatinib_" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -232,7 +236,7 @@
       </reaction>
       <reaction id="vLap8" reversible="false">
         <listOfReactants>
-          <speciesReference species="cyt_cong__lapatinib__ERBB2_1_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_cong__ERBB2_1__lapatinib_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -246,10 +250,11 @@
       </reaction>
       <reaction id="vLap9" reversible="false">
         <listOfReactants>
-          <speciesReference species="cyt_drug__lapatinib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_comp_in__lapatinib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_prot__ERBB4_1_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="cyt_cong__lapatinib__ERBB4_1_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_cong__ERBB4_1__lapatinib_" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -263,10 +268,11 @@
       </reaction>
       <reaction id="vLap10" reversible="false">
         <listOfReactants>
-          <speciesReference species="cyt_cong__lapatinib__ERBB4_1_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_cong__ERBB4_1__lapatinib_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="cyt_drug__lapatinib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_comp_in__lapatinib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_prot__ERBB4_1_" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -280,7 +286,7 @@
       </reaction>
       <reaction id="vLap11" reversible="false">
         <listOfReactants>
-          <speciesReference species="cyt_cong__lapatinib__ERBB4_1_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_cong__ERBB4_1__lapatinib_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">

@@ -1,12 +1,12 @@
 reactionId	compartment	equation	formula
-vLap1	Extracellular	ext_drug__lapatinib_ => cyt_drug__lapatinib_	((kLap1_1*(kLap1_2/kLap1_3))*ext_drug__lapatinib_)	
-vLap2	Cytoplasm	cyt_drug__lapatinib_ => ext_drug__lapatinib_	kLap2_1
-vLap3	Cytoplasm	cyt_drug__lapatinib_ => cyt_cong__lapatinib__EGFR_1_	kLap3_1
-vLap4	Cytoplasm	cyt_cong__lapatinib__EGFR_1_ => cyt_drug__lapatinib_	kLap4_1
-vLap5	Cytoplasm	cyt_cong__lapatinib__EGFR_1_ =>	kLap5_1
-vLap6	Cytoplasm	cyt_drug__lapatinib_ => cyt_cong__lapatinib__ERBB2_1_	kLap6_1
-vLap7	Cytoplasm	cyt_cong__lapatinib__ERBB2_1_ => cyt_drug__lapatinib_	kLap7_1
-vLap8	Cytoplasm	cyt_cong__lapatinib__ERBB2_1_ =>	kLap8_1
-vLap9	Cytoplasm	cyt_drug__lapatinib_ => cyt_cong__lapatinib__ERBB4_1_	kLap9_1
-vLap10	Cytoplasm	cyt_cong__lapatinib__ERBB4_1_ => cyt_drug__lapatinib_	kLap10_1
-vLap11	Cytoplasm	cyt_cong__lapatinib__ERBB4_1_ =>	kLap11_1
+vLap1	Extracellular	ext_comp__lapatinib_ => cyt_comp_in__lapatinib_	((kLap1_1*(Cytoplasm/Extracellular))*ext_comp__lapatinib_)
+vLap2	Cytoplasm	cyt_comp_in__lapatinib_ => ext_comp__lapatinib_	kLap2_1
+vLap3	Cytoplasm	cyt_comp_in__lapatinib_ + cyt_prot__EGFR_1_ => cyt_cong__EGFR_1__lapatinib_	kLap3_1
+vLap4	Cytoplasm	cyt_cong__EGFR_1__lapatinib_ => cyt_comp_in__lapatinib_ + cyt_prot__EGFR_1_	kLap4_1
+vLap5	Cytoplasm	cyt_cong__EGFR_1__lapatinib_ =>	kLap5_1
+vLap6	Cytoplasm	cyt_comp_in__lapatinib_ + cyt_prot__ERBB2_1_ => cyt_cong__ERBB2_1__lapatinib_	kLap6_1
+vLap7	Cytoplasm	cyt_cong__ERBB2_1__lapatinib_ => cyt_comp_in__lapatinib_	kLap7_1
+vLap8	Cytoplasm	cyt_cong__ERBB2_1__lapatinib_ =>	kLap8_1
+vLap9	Cytoplasm	cyt_comp_in__lapatinib_ + cyt_prot__ERBB4_1_ => cyt_cong__ERBB4_1__lapatinib_	kLap9_1
+vLap10	Cytoplasm	cyt_cong__ERBB4_1__lapatinib_ => cyt_comp_in__lapatinib_ + cyt_prot__ERBB4_1_	kLap10_1
+vLap11	Cytoplasm	cyt_cong__ERBB4_1__lapatinib_ =>	kLap11_1
