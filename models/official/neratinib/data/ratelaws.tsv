@@ -1,12 +1,12 @@
 reactionId	compartment	equation	formula
-vNer1	Extracellular	ext_drug__neratinib_ => cyt_drug__neratinib_	((kNer1_1*(kNer1_2/kNer1_3))*ext_drug__neratinib_)	
-vNer2	Cytoplasm	cyt_drug__neratinib_ => ext_drug__neratinib_	kNer2_1
-vNer3	Cytoplasm	cyt_drug__neratinib_ => cyt_cong__neratinib__EGFR_1_	kNer3_1
-vNer4	Cytoplasm	cyt_cong__neratinib__EGFR_1_ => cyt_drug__neratinib_	kNer4_1
-vNer5	Cytoplasm	cyt_cong__neratinib__EGFR_1_ =>	kNer5_1
-vNer6	Cytoplasm	cyt_drug__neratinib_ => cyt_cong__neratinib__ERBB2_1_	kNer6_1
-vNer7	Cytoplasm	cyt_cong__neratinib__ERBB2_1_ => cyt_drug__neratinib_	kNer7_1
-vNer8	Cytoplasm	cyt_cong__neratinib__ERBB2_1_ =>	kNer8_1
-vNer9	Cytoplasm	cyt_drug__neratinib_ => cyt_cong__neratinib__ERBB4_1_	kNer9_1
-vNer10	Cytoplasm	cyt_cong__neratinib__ERBB4_1_ => cyt_drug__neratinib_	kNer10_1
-vNer11	Cytoplasm	cyt_cong__neratinib__ERBB4_1_ =>	kNer11_1
+vNer1	Extracellular	ext_comp__neratinib_ => cyt_comp_in__neratinib_	((kNer1_1*(Cytoplasm/Extracellular))*ext_comp__neratinib_)
+vNer2	Cytoplasm	cyt_comp_in__neratinib_ => ext_comp__neratinib_	kNer2_1
+vNer3	Cytoplasm	cyt_comp_in__neratinib_ + cyt_prot__EGFR_1_ => cyt_cong__EGFR_1__neratinib_	kNer3_1
+vNer4	Cytoplasm	cyt_cong__EGFR_1__neratinib_ => cyt_comp_in__neratinib_ + cyt_prot__EGFR_1_	kNer4_1
+vNer5	Cytoplasm	cyt_cong__EGFR_1__neratinib_ =>	kNer5_1
+vNer6	Cytoplasm	cyt_comp_in__neratinib_ + cyt_prot__ERBB2_1_ => cyt_cong__ERBB2_1__neratinib_	kNer6_1
+vNer7	Cytoplasm	cyt_cong__ERBB2_1__neratinib_ => cyt_comp_in__neratinib_	kNer7_1
+vNer8	Cytoplasm	cyt_cong__ERBB2_1__neratinib_ =>	kNer8_1
+vNer9	Cytoplasm	cyt_comp_in__neratinib_ + cyt_prot__ERBB4_1_ => cyt_cong__ERBB4_1__neratinib_	kNer9_1
+vNer10	Cytoplasm	cyt_cong__ERBB4_1__neratinib_ => cyt_comp_in__neratinib_ + cyt_prot__ERBB4_1_	kNer10_1
+vNer11	Cytoplasm	cyt_cong__ERBB4_1__neratinib_ =>	kNer11_1

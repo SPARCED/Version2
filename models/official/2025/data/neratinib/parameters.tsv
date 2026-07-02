@@ -1,7 +1,5 @@
 reactionId	parameterId	parameterScale	lowerBound	upperBound	nominalValue	estimate
 vNer1	kNer1_1	lin	1.00E-02	1.00E-02	1.00E-02	0
-vNer1	kNer1_2	lin	5.25E-12	5.25E-12	5.25E-12	0
-vNer1	kNer1_3	lin	8.00E-08	8.00E-08	8.00E-08	0
 vNer2	kNer2_1	lin	1.00E-02	1.00E-02	1.00E-02	0
 vNer3	kNer3_1	lin	1.00E-04	1.00E-04	1.00E-04	0
 vNer4	kNer4_1	lin	0.00E+00	0.00E+00	0.00E+00	0
