@@ -1,7 +1,5 @@
 reactionId	parameterId	parameterScale	lowerBound	upperBound	nominalValue	estimate
 vAlp1	kAlp1_1	lin	1.00E-02	1.00E-02	1.00E-02	0
-vAlp1	kAlp1_2	lin	5.25E-12	5.25E-12	5.25E-12	0
-vAlp1	kAlp1_3	lin	8.00E-08	8.00E-08	8.00E-08	0
 vAlp2	kAlp2_1	lin	1.00E-02	1.00E-02	1.00E-02	0
 vAlp3	kAlp3_1	lin	1.00E-03	1.00E-03	1.00E-03	0
 vAlp4	kAlp4_1	lin	2.40E-03	2.40E-03	2.40E-03	0

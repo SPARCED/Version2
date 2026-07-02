@@ -86,15 +86,15 @@
       </compartment>
     </listOfCompartments>
     <listOfSpecies>
-      <species id="ext_drug__alpelisib_" compartment="Extracellular" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="cyt_drug__alpelisib_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="cyt_cong__alpelisib__PIK3C_1_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="cyt_cong__alpelisib__PIK3C__PIK3R_1_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="ext_comp__alpelisib_" compartment="Extracellular" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cyt_comp_in__alpelisib_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cyt_cong__PIK3C__alpelisib_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cyt_cong__PIK3C__PIK3R__alpelisib_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cyt_cong__PIK3C_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cyt_cong__PIK3C__PIK3R_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
     </listOfSpecies>
     <listOfParameters>
       <parameter id="kAlp1_1" value="0.01" constant="true"/>
-      <parameter id="kAlp1_2" value="5.25e-12" constant="true"/>
-      <parameter id="kAlp1_3" value="8e-08" constant="true"/>
       <parameter id="kAlp2_1" value="0.01" constant="true"/>
       <parameter id="kAlp3_1" value="0.001" constant="true"/>
       <parameter id="kAlp4_1" value="0.0024" constant="true"/>
@@ -106,10 +106,10 @@
     <listOfReactions>
       <reaction id="vAlp1" reversible="false">
         <listOfReactants>
-          <speciesReference species="ext_drug__alpelisib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="ext_comp__alpelisib_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="cyt_drug__alpelisib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_comp_in__alpelisib_" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -118,10 +118,10 @@
               <ci> kAlp1_1 </ci>
               <apply>
                 <divide/>
-                <ci> kAlp1_2 </ci>
-                <ci> kAlp1_3 </ci>
+                <ci> Cytoplasm </ci>
+                <ci> Extracellular </ci>
               </apply>
-              <ci> ext_drug__alpelisib_ </ci>
+              <ci> ext_comp__alpelisib_ </ci>
               <ci> Extracellular </ci>
             </apply>
           </math>
@@ -129,10 +129,10 @@
       </reaction>
       <reaction id="vAlp2" reversible="false">
         <listOfReactants>
-          <speciesReference species="cyt_drug__alpelisib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_comp_in__alpelisib_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="ext_drug__alpelisib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="ext_comp__alpelisib_" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -146,10 +146,11 @@
       </reaction>
       <reaction id="vAlp3" reversible="false">
         <listOfReactants>
-          <speciesReference species="cyt_drug__alpelisib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_comp_in__alpelisib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_cong__PIK3C_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="cyt_cong__alpelisib__PIK3C_1_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_cong__PIK3C__alpelisib_" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -163,10 +164,11 @@
       </reaction>
       <reaction id="vAlp4" reversible="false">
         <listOfReactants>
-          <speciesReference species="cyt_cong__alpelisib__PIK3C_1_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_cong__PIK3C__alpelisib_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="cyt_drug__alpelisib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_comp_in__alpelisib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_cong__PIK3C_" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -180,7 +182,7 @@
       </reaction>
       <reaction id="vAlp5" reversible="false">
         <listOfReactants>
-          <speciesReference species="cyt_cong__alpelisib__PIK3C_1_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_cong__PIK3C__alpelisib_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -194,10 +196,11 @@
       </reaction>
       <reaction id="vAlp6" reversible="false">
         <listOfReactants>
-          <speciesReference species="cyt_drug__alpelisib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_comp_in__alpelisib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_cong__PIK3C__PIK3R_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="cyt_cong__alpelisib__PIK3C__PIK3R_1_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_cong__PIK3C__PIK3R__alpelisib_" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -211,10 +214,11 @@
       </reaction>
       <reaction id="vAlp7" reversible="false">
         <listOfReactants>
-          <speciesReference species="cyt_cong__alpelisib__PIK3C__PIK3R_1_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_cong__PIK3C__PIK3R__alpelisib_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="cyt_drug__alpelisib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_comp_in__alpelisib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_cong__PIK3C__PIK3R_" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -228,7 +232,7 @@
       </reaction>
       <reaction id="vAlp8" reversible="false">
         <listOfReactants>
-          <speciesReference species="cyt_cong__alpelisib__PIK3C__PIK3R_1_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_cong__PIK3C__PIK3R__alpelisib_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">

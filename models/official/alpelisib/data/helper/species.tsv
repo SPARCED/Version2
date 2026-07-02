@@ -1,0 +1,3 @@
+speciesId	compartment	initialConcentration	solver
+cyt_cong__PIK3C_	Cytoplasm	0.00E+00	Deterministic
+cyt_cong__PIK3C__PIK3R_	Cytoplasm	0.00E+00	Deterministic
