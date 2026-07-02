@@ -1,0 +1,4 @@
+speciesId	compartment	initialConcentration	solver
+ext_comp__trametinib_	Extracellular	0.00E+00	Deterministic
+cyt_comp_in__trametinib_	Cytoplasm	0.00E+00	Deterministic
+cyt_cong__p_MAPK__trametinib_	Nucleus	0.00E+00	Deterministic

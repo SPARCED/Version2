@@ -1,0 +1,6 @@
+reactionId	compartment	equation	formula
+vTra1	Extracellular	ext_comp__trametinib_ => cyt_comp_in__trametinib_	((kTra1_1*(Cytoplasm/Extracellular))*ext_comp__trametinib_)
+vTra2	Cytoplasm	cyt_comp_in__trametinib_ => ext_comp__trametinib_	kTra2_1
+vTra3	Cytoplasm	cyt_comp_in__trametinib_ + cyt_cong__p_MAPK_ => cyt_cong__p_MAPK__trametinib_	kTra3_1
+vTra4	Cytoplasm	cyt_cong__p_MAPK__trametinib_ => cyt_comp_in__trametinib_ + cyt_cong__p_MAPK_	kTra4_1
+vTra5	Cytoplasm	cyt_cong__p_MAPK__trametinib_ => 	kTra5_1

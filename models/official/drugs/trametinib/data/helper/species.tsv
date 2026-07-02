@@ -1,0 +1,2 @@
+speciesId	compartment	initialConcentration	solver
+cyt_cong__p_MAPK_	Nucleus	0.00E+00	Deterministic

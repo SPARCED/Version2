@@ -1,0 +1,6 @@
+reactionId	parameterId	parameterScale	lowerBound	upperBound	nominalValue	estimate
+vTra1	kTra1_1	lin	1.00E-02	1.00E-02	1.00E-02	0
+vTra2	kTra2_1	lin	1.00E-02	1.00E-02	1.00E-02	0
+vTra3	kTra3_1	lin	1.00E-01	1.00E-01	1.00E-01	0
+vTra4	kTra4_1	lin	3.50E-02	3.50E-02	3.50E-01	0
+vTra5	kTra5_1	lin	2.22E-06	2.22E-06	2.22E-06	0
