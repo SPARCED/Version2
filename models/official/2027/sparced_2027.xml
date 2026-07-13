@@ -7,7 +7,8 @@
         <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.5525390.svg" alt="DOI"/></a></p>
       </body>
     </notes>
-  <model id="debug_model" name="Debug Model" substanceUnits="substance" timeUnits="time" volumeUnits="volume">
+  <model id="sparced_2027" name="SPARCED 2027
+" substanceUnits="substance" timeUnits="time" volumeUnits="volume">
     <listOfUnitDefinitions>
       <unitDefinition id="nM" name="nanomole/litre">
         <listOfUnits>
