@@ -44,7 +44,9 @@ RATELAWS_COLUMNS = {
 SPECIES_COLUMNS = {
         "speciesId": 0,
         "compartment": 1,
-        "initialConcentration": 2,
-        "solver": 3
+        "type": 2,
+        "initialConcentration": 3,
+        "solver": 4,
+        "annotation": 5
         }
 

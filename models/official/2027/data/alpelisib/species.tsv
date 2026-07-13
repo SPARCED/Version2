@@ -1,5 +1,5 @@
-speciesId	compartment	initialConcentration	solver
-ext_comp__alpelisib_	Extracellular	0.00E+00	Deterministic
-cyt_comp_in__alpelisib_	Cytoplasm	0.00E+00	Deterministic
-cyt_cong__PIK3C__alpelisib_	Cytoplasm	0.00E+00	Deterministic
-cyt_cong__PIK3C__PIK3R__alpelisib_	Cytoplasm	0.00E+00	Deterministic
+speciesId	compartment	type	initialConcentration	solver	annotation
+ext_comp__alpelisib_	Extracellular	Compoumd	0.00E+00	Deterministic
+cyt_comp_in__alpelisib_	Cytoplasm	Compound	0.00E+00	Deterministic
+cyt_cong__PIK3C__alpelisib_	Cytoplasm	Conglomerate	0.00E+00	Deterministic
+cyt_cong__PIK3C__PIK3R__alpelisib_	Cytoplasm	Conglomerate	0.00E+00	Deterministic
