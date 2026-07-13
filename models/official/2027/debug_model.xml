@@ -794,6 +794,8 @@
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/uniprot/P24864"/>
                   <rdf:li rdf:resource="https://identifiers.org/uniprot/O96020"/>
+                  <rdf:li rdf:resource="https://identifiers.org/uniprot/P24941"/>
+                  <rdf:li rdf:resource="https://identifiers.org/uniprot/P46527"/>
                 </rdf:Bag>
               </bqbiol:is>
             </rdf:Description>
