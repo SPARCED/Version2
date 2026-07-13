@@ -37,8 +37,6 @@ class SBMLExporter:
             return (BQB.IS, f"chebi/{annotation}")
         if re.match(r"^CHEMBL\d+$", annotation):
             return(BQB.IS, f"chembl/{annotation}")
-        print("weirdo")
-        print(annotation)
 
     def _to_sbmlutils_compartment(self, c: in_house.Compartment) -> Compartment:
         annotation = getattr(c, "annotation", None)
