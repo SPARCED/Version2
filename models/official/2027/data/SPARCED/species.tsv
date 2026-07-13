@@ -50,7 +50,7 @@ nuc_cong__CCNE_	Nucleus	Protein	0.2553392305	Deterministic	P24864,O96020
 nuc_cong_i__CCNE__CDK2_	Nucleus	Protein	0.8895689476	Deterministic	P24864,O96020,P24941
 nuc_cong__CCNE__CDK2_	Nucleus	Protein	2.746655183	Deterministic	P24864,O96020,P24941
 nuc_prot__SKP2_1_	Nucleus	Protein	11.40896301	Deterministic	Q13309-1
-nuc_cong__CCNE__CDK2__CDN1B_	Nucleus	Protein	1.122585115	Deterministic	P24864,O96020,P24941 P46527
+nuc_cong__CCNE__CDK2__CDN1B_	Nucleus	Protein	1.122585115	Deterministic	P24864,O96020,P24941,P46527
 nuc_prot__MPIP1_1_	Nucleus	Protein	141.2881402	Deterministic	P30304-1
 nuc_prot_i__MPIP2_1_	Nucleus	Protein	49.17500389	Deterministic	P30305-1
 nuc_prot_i__MPIP1_1_	Nucleus	Protein	16.02256602	Deterministic	P30304-1
