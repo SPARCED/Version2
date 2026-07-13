@@ -26,6 +26,11 @@ class SBMLExporter:
     def __init__(self, root_path: str | Path):
         self.root_path = PathValidator.directory(root_path)
 
+    def _format_name_to_id(self, name: str):
+        name = name.strip().lower()
+        name = re.sub(r"[^a-z0-9_]", "_", name) # Replace non alphanumeric characters by underscores
+        return re.sub(r"_+", "_", name)         # Remove consecutive underscores
+
     def _resolve_annotation(self, annotation):
         if re.match(r"^GO:\d+$", annotation):
             return (BQB.IS, f"go/{annotation}")
@@ -70,8 +75,8 @@ class SBMLExporter:
 
     def to_sbml(self, data: DataStorage):
         model = Model(
-                "debug_model",
-                name="Debug Model",
+                self._format_name_to_id(data.model_name),
+                name=data.model_name,
                 units=U,
                 model_units=ModelUnits(
                     time=U.time,

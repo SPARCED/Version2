@@ -18,6 +18,7 @@ def convert_model(relative_path: str | Path):
     input_files = InputScanner(root)
     # Load input data
     model_data = DataStorage()
+    model_data.set_model_name(input_files.model_name)
     model_data.load_in_house_files(input_files.in_house_files)
     # Convert the model
     exporter = SBMLExporter(root)

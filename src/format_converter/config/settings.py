@@ -6,4 +6,5 @@
 # Standard directory names
 DEBUG_DIR_NAME = "debug"
 INPUT_DIR_NAME = "data"
+MODEL_NAME_FILE = "name"
 

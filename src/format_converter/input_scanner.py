@@ -6,7 +6,7 @@ from pathlib import Path
 
 from config.in_house_file_format import EXTENSION as IN_HOUSE_EXTENSION
 from config.in_house_file_format import InHouseFilesNames
-from config.settings import INPUT_DIR_NAME
+from config.settings import INPUT_DIR_NAME, MODEL_NAME_FILE
 
 from utils.path_validator import PathValidator
 
@@ -16,6 +16,8 @@ class InputScanner:
         # Resolve paths
         self.root_path = PathValidator.directory(root_path)
         self.data_path = PathValidator.directory(self.root_path / Path(INPUT_DIR_NAME.lstrip("/\\")))
+        # Configuration file
+        self.model_name = self.root_path / Path(MODEL_NAME_FILE)
         # Create data structures
         self.in_house_files = {file_type: [] for file_type in InHouseFilesNames}
         self.remaining_files = defaultdict(list)

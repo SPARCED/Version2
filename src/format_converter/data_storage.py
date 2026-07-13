@@ -10,6 +10,7 @@ from datatypes import Compartment, Parameter, Specie, Ratelaw
 
 class DataStorage:
     def __init__(self):
+        self.model_name = "My model"
         self.compartments: list[Compartment] = []
         self.parameters: list[Parameter] = []
         self.species: list[Specie] = []
@@ -51,4 +52,8 @@ class DataStorage:
                         for line in f:
                             parts=line.strip().split("\t")
                             loader(parts)
+
+    def set_model_name(self, name: Path | str):
+        if name.is_file():
+            self.model_name = name.read_text()
 
