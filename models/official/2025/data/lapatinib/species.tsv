@@ -1,6 +1,0 @@
-speciesId	compartment	initialConcentration	solver
-ext_comp__lapatinib_	Extracellular	0.00E+00	Deterministic
-cyt_comp_in__lapatinib_	Cytoplasm	0.00E+00	Deterministic
-cyt_cong__EGFR_1__lapatinib_	Cytoplasm	0.00E+00	Deterministic
-cyt_cong__ERBB2_1__lapatinib_	Cytoplasm	0.00E+00	Deterministic
-cyt_cong__ERBB4_1__lapatinib_	Cytoplasm	0.00E+00	Deterministic

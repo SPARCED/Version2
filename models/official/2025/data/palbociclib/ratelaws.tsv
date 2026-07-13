@@ -1,8 +1,0 @@
-reactionId	compartment	equation	formula
-vPal1	Extracellular	ext_comp__palbociclib_ => cyt_comp_in__palbociclib_	((kPal1_1*(Cytoplasm/Extracellular))*ext_comp__palbociclib_)
-vPal2	Cytoplasm	cyt_comp_in__palbociclib_ => ext_comp__palbociclib_	kPal2_1
-vPal3	Cytoplasm	cyt_comp_in__palbociclib_ => nuc_comp_in__palbociclib_	((kPal3_1*(Nucleus/Cytoplasm))*cyt_comp_in__palbociclib_)
-vPal4	Nucleus	nuc_comp_in__palbociclib_ => cyt_comp_in__palbociclib_	kPal4_1
-vPal5	Nucleus	nuc_comp_in__palbociclib_ + nuc_cong__CCND__CDK4_ => nuc_cong__CCND__CDK4__palbociclib_	kPal5_1
-vPal6	Nucleus	nuc_cong__CCND__CDK4__palbociclib_ => nuc_comp_in__palbociclib_ + nuc_cong__CCND__CDK4_	kPal6_1
-vPal7	Nucleus	nuc_cong__CCND__CDK4__palbociclib_ => 	kPal7_1

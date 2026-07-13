@@ -1,8 +1,0 @@
-reactionId	parameterId	parameterScale	lowerBound	upperBound	nominalValue	estimate
-vPal1	kPal1_1	lin	1.00E-02	1.00E-02	1.00E-02	0
-vPal2	kPal2_1	lin	1.00E-02	1.00E-02	1.00E-02	0
-vPal3	kPal3_1	lin	1.00E-02	1.00E-02	1.00E-02	0
-vPal4	kPal4_1	lin	1.00E-02	1.00E-02	1.00E-01	0
-vPal5	kPal5_1	lin	1.00E-03	1.00E-03	1.00E-03	0
-vPal6	kPal6_1	lin	1.90E-03	1.90E-03	1.90E-03	0
-vPal7	kPal7_1	lin	2.36E-03	2.36E-03	2.36E-03	0

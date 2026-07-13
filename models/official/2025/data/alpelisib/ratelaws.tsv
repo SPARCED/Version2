@@ -1,9 +1,0 @@
-reactionId	compartment	equation	formula
-vAlp1	Extracellular	ext_comp__alpelisib_ => cyt_comp_in__alpelisib_	((kAlp1_1*(Cytoplasm/Extracellular))*ext_comp__alpelisib_)	
-vAlp2	Cytoplasm	cyt_comp_in__alpelisib_ => ext_comp__alpelisib_	kAlp2_1
-vAlp3	Cytoplasm	cyt_comp_in__alpelisib_ + cyt_cong__PIK3C_ => cyt_cong__PIK3C__alpelisib_	kAlp3_1
-vAlp4	Cytoplasm	cyt_cong__PIK3C__alpelisib_ => cyt_comp_in__alpelisib_ + cyt_cong__PIK3C_	kAlp4_1
-vAlp5	Cytoplasm	cyt_cong__PIK3C__alpelisib_ =>	kAlp5_1
-vAlp6	Cytoplasm	cyt_comp_in__alpelisib_ + cyt_cong__PIK3C__PIK3R_ => cyt_cong__PIK3C__PIK3R__alpelisib_	kAlp6_1
-vAlp7	Cytoplasm	cyt_cong__PIK3C__PIK3R__alpelisib_ => cyt_comp_in__alpelisib_ + cyt_cong__PIK3C__PIK3R_	kAlp7_1
-vAlp8	Cytoplasm	cyt_cong__PIK3C__PIK3R__alpelisib_ =>	kAlp8_1
