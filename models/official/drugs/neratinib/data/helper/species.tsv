@@ -1,4 +1,4 @@
-speciesId	compartment	initialConcentration	solver
-cyt_prot__EGFR_1_	Cytoplasm	0.00E+00	Deterministic
-cyt_prot__ERBB2_1_	Cytoplasm	0.00E+00	Deterministic
-cyt_prot__ERBB4_1_	Cytoplasm	0.00E+00	Deterministic
+speciesId	compartment	type	initialConcentration	solver	annotation
+cyt_prot__EGFR_1_	Cytoplasm	Protein	0.00E+00	Deterministic	P00533-1
+cyt_prot__ERBB2_1_	Cytoplasm	Protein	0.00E+00	Deterministic	P04626-1
+cyt_prot__ERBB4_1_	Cytoplasm	Protein	0.00E+00	Deterministic	Q15303-1

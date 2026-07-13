@@ -7,7 +7,8 @@
         <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.5525390.svg" alt="DOI"/></a></p>
       </body>
     </notes>
-  <model id="debug_model" name="Debug Model" substanceUnits="substance" timeUnits="time" volumeUnits="volume">
+  <model id="sparced_s_palbociclib_submodel" name="SPARCED&apos;s Palbociclib submodel
+" substanceUnits="substance" timeUnits="time" volumeUnits="volume">
     <listOfUnitDefinitions>
       <unitDefinition id="nM" name="nanomole/litre">
         <listOfUnits>
@@ -90,7 +91,23 @@
       <species id="cyt_comp_in__palbociclib_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
       <species id="nuc_comp_in__palbociclib_" compartment="Nucleus" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
       <species id="nuc_cong__CCND__CDK4__palbociclib_" compartment="Nucleus" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="nuc_cong__CCND__CDK4_" compartment="Nucleus" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species metaid="meta_nuc_cong__CCND__CDK4_" id="nuc_cong__CCND__CDK4_" compartment="Nucleus" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_nuc_cong__CCND__CDK4_">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/uniprot/P24385"/>
+                  <rdf:li rdf:resource="https://identifiers.org/uniprot/P30279"/>
+                  <rdf:li rdf:resource="https://identifiers.org/uniprot/P30281"/>
+                  <rdf:li rdf:resource="https://identifiers.org/uniprot/P11802"/>
+                  <rdf:li rdf:resource="https://identifiers.org/uniprot/Q00534"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
     </listOfSpecies>
     <listOfParameters>
       <parameter id="kPal1_1" value="0.01" constant="true"/>

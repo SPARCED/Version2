@@ -1,2 +1,2 @@
-speciesId	compartment	initialConcentration	solver
-nuc_cong__CCND__CDK4_	Nucleus	0.00E+00	Deterministic
+speciesId	compartment	type	initialConcentration	solver	annotation
+nuc_cong__CCND__CDK4_	Nucleus	Protein	0.00E+00	Deterministic	P24385,P30279,P30281,P11802,Q00534

@@ -7,7 +7,8 @@
         <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.5525390.svg" alt="DOI"/></a></p>
       </body>
     </notes>
-  <model id="debug_model" name="Debug Model" substanceUnits="substance" timeUnits="time" volumeUnits="volume">
+  <model id="sparced_s_trametinib_submodel" name="SPARCED&apos;s Trametinib submodel
+" substanceUnits="substance" timeUnits="time" volumeUnits="volume">
     <listOfUnitDefinitions>
       <unitDefinition id="nM" name="nanomole/litre">
         <listOfUnits>
@@ -86,159 +87,117 @@
       </compartment>
     </listOfCompartments>
     <listOfSpecies>
-      <species id="ext_comp__alpelisib_" compartment="Extracellular" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="cyt_comp_in__alpelisib_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="cyt_cong__PIK3C__alpelisib_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="cyt_cong__PIK3C__PIK3R__alpelisib_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="cyt_cong__PIK3C_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
-      <species id="cyt_cong__PIK3C__PIK3R_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="ext_comp__trametinib_" compartment="Extracellular" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cyt_comp_in__trametinib_" compartment="Cytoplasm" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="cyt_cong__p_MAPK__trametinib_" compartment="Nucleus" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species metaid="meta_cyt_cong__p_MAPK_" id="cyt_cong__p_MAPK_" compartment="Nucleus" initialConcentration="0" substanceUnits="substance" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#meta_cyt_cong__p_MAPK_">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="https://identifiers.org/uniprot/P28482"/>
+                  <rdf:li rdf:resource="https://identifiers.org/uniprot/P27361"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
     </listOfSpecies>
     <listOfParameters>
-      <parameter id="kAlp1_1" value="0.01" constant="true"/>
-      <parameter id="kAlp2_1" value="0.01" constant="true"/>
-      <parameter id="kAlp3_1" value="0.001" constant="true"/>
-      <parameter id="kAlp4_1" value="0.0024" constant="true"/>
-      <parameter id="kAlp5_1" value="4.81e-06" constant="true"/>
-      <parameter id="kAlp6_1" value="0.001" constant="true"/>
-      <parameter id="kAlp7_1" value="0.0024" constant="true"/>
-      <parameter id="kAlp8_1" value="4.81e-06" constant="true"/>
+      <parameter id="kTra1_1" value="0.01" constant="true"/>
+      <parameter id="kTra2_1" value="0.01" constant="true"/>
+      <parameter id="kTra3_1" value="0.1" constant="true"/>
+      <parameter id="kTra4_1" value="0.35" constant="true"/>
+      <parameter id="kTra5_1" value="2.22e-06" constant="true"/>
     </listOfParameters>
     <listOfReactions>
-      <reaction id="vAlp1" reversible="false">
+      <reaction id="vTra1" reversible="false">
         <listOfReactants>
-          <speciesReference species="ext_comp__alpelisib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="ext_comp__trametinib_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="cyt_comp_in__alpelisib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_comp_in__trametinib_" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> kAlp1_1 </ci>
+              <ci> kTra1_1 </ci>
               <apply>
                 <divide/>
                 <ci> Cytoplasm </ci>
                 <ci> Extracellular </ci>
               </apply>
-              <ci> ext_comp__alpelisib_ </ci>
+              <ci> ext_comp__trametinib_ </ci>
               <ci> Extracellular </ci>
             </apply>
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="vAlp2" reversible="false">
+      <reaction id="vTra2" reversible="false">
         <listOfReactants>
-          <speciesReference species="cyt_comp_in__alpelisib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_comp_in__trametinib_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="ext_comp__alpelisib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="ext_comp__trametinib_" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> kAlp2_1 </ci>
+              <ci> kTra2_1 </ci>
               <ci> Cytoplasm </ci>
             </apply>
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="vAlp3" reversible="false">
+      <reaction id="vTra3" reversible="false">
         <listOfReactants>
-          <speciesReference species="cyt_comp_in__alpelisib_" stoichiometry="1" constant="true"/>
-          <speciesReference species="cyt_cong__PIK3C_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_comp_in__trametinib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_cong__p_MAPK_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="cyt_cong__PIK3C__alpelisib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_cong__p_MAPK__trametinib_" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> kAlp3_1 </ci>
+              <ci> kTra3_1 </ci>
               <ci> Cytoplasm </ci>
             </apply>
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="vAlp4" reversible="false">
+      <reaction id="vTra4" reversible="false">
         <listOfReactants>
-          <speciesReference species="cyt_cong__PIK3C__alpelisib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_cong__p_MAPK__trametinib_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="cyt_comp_in__alpelisib_" stoichiometry="1" constant="true"/>
-          <speciesReference species="cyt_cong__PIK3C_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_comp_in__trametinib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_cong__p_MAPK_" stoichiometry="1" constant="true"/>
         </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> kAlp4_1 </ci>
+              <ci> kTra4_1 </ci>
               <ci> Cytoplasm </ci>
             </apply>
           </math>
         </kineticLaw>
       </reaction>
-      <reaction id="vAlp5" reversible="false">
+      <reaction id="vTra5" reversible="false">
         <listOfReactants>
-          <speciesReference species="cyt_cong__PIK3C__alpelisib_" stoichiometry="1" constant="true"/>
+          <speciesReference species="cyt_cong__p_MAPK__trametinib_" stoichiometry="1" constant="true"/>
         </listOfReactants>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <times/>
-              <ci> kAlp5_1 </ci>
-              <ci> Cytoplasm </ci>
-            </apply>
-          </math>
-        </kineticLaw>
-      </reaction>
-      <reaction id="vAlp6" reversible="false">
-        <listOfReactants>
-          <speciesReference species="cyt_comp_in__alpelisib_" stoichiometry="1" constant="true"/>
-          <speciesReference species="cyt_cong__PIK3C__PIK3R_" stoichiometry="1" constant="true"/>
-        </listOfReactants>
-        <listOfProducts>
-          <speciesReference species="cyt_cong__PIK3C__PIK3R__alpelisib_" stoichiometry="1" constant="true"/>
-        </listOfProducts>
-        <kineticLaw>
-          <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <apply>
-              <times/>
-              <ci> kAlp6_1 </ci>
-              <ci> Cytoplasm </ci>
-            </apply>
-          </math>
-        </kineticLaw>
-      </reaction>
-      <reaction id="vAlp7" reversible="false">
-        <listOfReactants>
-          <speciesReference species="cyt_cong__PIK3C__PIK3R__alpelisib_" stoichiometry="1" constant="true"/>
-        </listOfReactants>
-        <listOfProducts>
-          <speciesReference species="cyt_comp_in__alpelisib_" stoichiometry="1" constant="true"/>
-          <speciesReference species="cyt_cong__PIK3C__PIK3R_" stoichiometry="1" constant="true"/>
-        </listOfProducts>
-        <kineticLaw>
-          <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <apply>
-              <times/>
-              <ci> kAlp7_1 </ci>
-              <ci> Cytoplasm </ci>
-            </apply>
-          </math>
-        </kineticLaw>
-      </reaction>
-      <reaction id="vAlp8" reversible="false">
-        <listOfReactants>
-          <speciesReference species="cyt_cong__PIK3C__PIK3R__alpelisib_" stoichiometry="1" constant="true"/>
-        </listOfReactants>
-        <kineticLaw>
-          <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <apply>
-              <times/>
-              <ci> kAlp8_1 </ci>
+              <ci> kTra5_1 </ci>
               <ci> Cytoplasm </ci>
             </apply>
           </math>
