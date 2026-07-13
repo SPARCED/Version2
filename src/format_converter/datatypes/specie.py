@@ -11,13 +11,21 @@ class Specie:
     id: str
     compartment: str
     initial_concentration: float
+    annotations: list[str]
 
     @classmethod
     def from_row(cls, row):
         c = SPECIES_COLUMNS
+
+        if c["annotation"] < len(row):
+            annotation = [a.strip() for a in row[c["annotation"]].split(",") if a.strip()]
+        else:
+            annotation = []
+
         return cls(
                 id=row[c["speciesId"]],
                 compartment=row[c["compartment"]],
-                initial_concentration=float(row[c["initialConcentration"]])
+                initial_concentration=float(row[c["initialConcentration"]]),
+                annotations=annotation
                 )
 

@@ -9,6 +9,8 @@ from sbmlutils.metadata import *
 
 from utils.path_validator import PathValidator
 
+import re
+
 import datatypes as in_house
 from data_storage import DataStorage
 
@@ -24,10 +26,24 @@ class SBMLExporter:
     def __init__(self, root_path: str | Path):
         self.root_path = PathValidator.directory(root_path)
 
+    def _resolve_annotation(self, annotation):
+        if re.match(r"^GO:\d+$", annotation):
+            return (BQB.IS, f"go/{annotation}")
+        if re.match(r"^[OPQ]\d[A-Z0-9]{3}\d(-\d+)?$", annotation):
+            return (BQB.IS, f"uniprot/{annotation}")
+        if re.match(r"^ENS", annotation):
+            return (BQB.IS, f"ensembl/{annotation}")
+        if re.match(r"^CHEBI:\d+$", annotation):
+            return (BQB.IS, f"chebi/{annotation}")
+        if re.match(r"^CHEMBL\d+$", annotation):
+            return(BQB.IS, f"chembl/{annotation}")
+        print("weirdo")
+        print(annotation)
+
     def _to_sbmlutils_compartment(self, c: in_house.Compartment) -> Compartment:
         annotation = getattr(c, "annotation", None)
         return Compartment(
-                annotations = [(BQB.IS, f"go/{annotation}")] if annotation else [],
+                annotations = [self._resolve_annotation(annotation)] if annotation else [],
                 sid=getattr(c, "id", None),
                 unit=U.volume,
                 value=getattr(c, "value", None))
@@ -46,7 +62,9 @@ class SBMLExporter:
                 )
     
     def _to_sbmlutils_species(self, s: in_house.Specie) -> Species:
+        annotations = getattr(s, "annotations", None)
         return Species(
+                annotations = [self._resolve_annotation(a) for a in annotations] if annotations else [],
                 sid=getattr(s, "id", None),
                 initialConcentration=getattr(s, "initial_concentration", None),
                 compartment=getattr(s, "compartment", None),
