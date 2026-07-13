@@ -724,8 +724,8 @@ cyt_comp__MAP2Kinhibitor_	Cytoplasm	Protein	0.0	Deterministic	Q02750,P36507
 cyt_mixed__MAP2Kinhibitor__p_p_MAP2K_	Cytoplasm	Protein	0.0	Deterministic	Q02750,P36507
 cyt_comp__AKTinhibitor_	Cytoplasm	Protein	0.0	Deterministic	P31749,P31751
 cyt_cong__AKTinhibitor__AKT_	Cytoplasm	Protein	0.0	Deterministic	P31749,P31751
-cyt_abs__TotalmRNA_	Cytoplasm	Protein	37.68942105	Deterministic	ChEBI:33699
-cyt_abs__IF4E_1__TotalmRNA_	Cytoplasm	Protein	88.80980732	Deterministic	ChEBI:33699,P06730-1
+cyt_abs__TotalmRNA_	Cytoplasm	Protein	37.68942105	Deterministic	CHEBI:33699
+cyt_abs__IF4E_1__TotalmRNA_	Cytoplasm	Protein	88.80980732	Deterministic	CHEBI:33699,P06730-1
 cyt_prot__INGR2_	Cytoplasm	Protein	0.7885015722	Deterministic	P38484
 cyt_cong__JAK_	Cytoplasm	Protein	12.90983459	Deterministic	P23458,O60674
 cyt_cong__INGR2__JAK_	Cytoplasm	Protein	20.35697717	Deterministic	P38484,P23458,O60674
