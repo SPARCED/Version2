@@ -40,8 +40,8 @@ def extract_modifiers(eq, formula):
 
 
 if __name__ == "__main__":
-    old_file = Path("../models/official/2027/data/SPARCED/old_ratelaws.tsv")
-    new_file = Path("../models/official/2027/data/SPARCED/new_ratelaws.tsv")
+    old_file = Path("../legacy/ArrowRatelaws.tsv")
+    new_file = Path("../data/ratelaws.tsv")
     
     if not old_file.exists() or not old_file.is_file():
         raise ValueError(f"Invalid path")
