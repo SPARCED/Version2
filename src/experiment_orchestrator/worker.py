@@ -3,7 +3,7 @@
 
 from mpi4py import MPI
 
-from config.settings import BROKER_RANK
+from config import BROKER_RANK
 
 
 def worker(comm, rank, size, config):

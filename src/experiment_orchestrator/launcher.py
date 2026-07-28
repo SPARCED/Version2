@@ -7,8 +7,7 @@ from pathlib import Path
 from broker import broker
 from worker import worker
 
-from config.settings import BROKER_RANK
-
+from config import BROKER_RANK
 from preprocessing import load_config
 
 
