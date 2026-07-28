@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from mpi4py import MPI
-
 from config import BROKER_RANK
-
+from runtime.logging import log
 
 def broker(comm, rank, size, config):
-    print("Hello from the broker!")
+    log.info("Broker started")
+    log.debug("Config: %r", config)
 

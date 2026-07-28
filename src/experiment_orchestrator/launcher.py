@@ -9,12 +9,16 @@ from worker import worker
 
 from config import BROKER_RANK
 from preprocessing import load_config
+from runtime.logging import setup
 
 
-def run_experiment(model_path: str | Path, experiment_name: str):
+def run_experiment(model_path: str | Path, experiment_name: str, logging_level: str = "INFO"):
     comm = MPI.COMM_WORLD
     rank = comm.Get_rank()
     size = comm.Get_size()
+
+    # Define logging level
+    setup(logging_level, rank)
 
     if size < 2:
         raise RuntimeError(f"Please provide at least 2 MPI processes. Currently alloted: {size}.")
@@ -35,5 +39,5 @@ def run_experiment(model_path: str | Path, experiment_name: str):
 
 
 if __name__ == "__main__":
-    run_experiment("../path/to/model", "experiment_name")
+    run_experiment("../path/to/model", "experiment_name", "DEBUG")
 
