@@ -9,10 +9,13 @@ from worker import worker
 
 from config import BROKER_RANK
 from preprocessing import load_config
-from runtime.logging import setup
+from runtime.logging import log, log_time, setup
+from runtime.performance import now
 
 
 def run_experiment(model_path: str | Path, experiment_name: str, logging_level: str = "INFO"):
+    t_total_start = now()
+
     comm = MPI.COMM_WORLD
     rank = comm.Get_rank()
     size = comm.Get_size()
@@ -30,12 +33,19 @@ def run_experiment(model_path: str | Path, experiment_name: str, logging_level: 
     else:
         config = None
 
+    t_bcast_start = now()
     config = comm.bcast(config, root=0)
+    t_bcast_stop = now() - t_bcast_start
+    log_time("bcast: %f", t_bcast_stop) 
+
     
     if rank == BROKER_RANK:
         broker(comm, rank, size, config)
     else:
         worker(comm, rank, size, config)
+
+    t_total_stop = now() - t_total_start
+    log_time("total: %f", t_total_stop)
 
 
 if __name__ == "__main__":
