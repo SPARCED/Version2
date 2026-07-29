@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from config import BROKER_RANK
+from config.mpi import BROKER_RANK
+
 from runtime.logging import log
+
 
 def broker(comm, rank, size, config):
     log.info("Broker started")

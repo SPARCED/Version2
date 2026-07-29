@@ -1,21 +1,25 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from pathlib import Path
+
+import yaml
+
+from config.paths import PROTOCOLS_DIR_PATH
 
 
+def load_config(protocol_relative_path: str | Path, model_relative_path: str | Path):
+    # Resolve paths
+    protocol_path = PROTOCOLS_DIR_PATH / Path(protocol_relative_path.lstrip("/\\"))
 
-# import yaml
-# with open("config.yaml") as f:
-#   config = yaml.safe_load(f)
-# config = comm.bcast(config, root=0)
+    if not protocol_path.exists():
+        raise ValueError(f"Invalid path")
+    if not protocol_path.is_file():
+        raise ValueError(f"Given path is not a file")
 
-def load_config():
-    # Load config (read YAML)
-    config = {
-            "SBML" : "somewhere",
-            "seed": 42,
-            "info": "foo"
-            }
+    # Read configuration
+    with open(protocol_path) as f:
+        config = yaml.safe_load(f)
 
     # VALIDATE the config before sending it to all cores!!
     # required = ["sbml_file", "output_dir"]

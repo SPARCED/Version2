@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# GENERAL SETTINGS
+# MPI4PY VARIABLES
 
-# mpi4py variables
 BROKER_RANK = 0
 

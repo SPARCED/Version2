@@ -4,16 +4,22 @@
 from mpi4py import MPI
 from pathlib import Path
 
-from broker import broker
-from worker import worker
+from config.mpi import BROKER_RANK
 
-from config import BROKER_RANK
-from preprocessing import load_config
 from runtime.logging import log, log_time, setup
 from runtime.performance import now
 
+from preprocessing import load_config
 
-def run_experiment(model_path: str | Path, experiment_name: str, logging_level: str = "INFO"):
+from broker import broker
+from worker import worker
+
+
+def run_experiment(
+        protocol_relative_path: str | Path,
+        model_relative_path: str | Path,
+        logging_level: str = "INFO"):
+    
     t_total_start = now()
 
     comm = MPI.COMM_WORLD
@@ -29,10 +35,11 @@ def run_experiment(model_path: str | Path, experiment_name: str, logging_level: 
         raise RuntimeError(f"BROKER_RANK must be in [0, {size-1}].")
 
     if rank == 0:
-        config = load_config()
+        config = load_config(protocol_relative_path, model_relative_path)
     else:
         config = None
 
+    # Broadcast configuration
     t_bcast_start = now()
     config = comm.bcast(config, root=0)
     t_bcast_stop = now() - t_bcast_start
@@ -49,5 +56,6 @@ def run_experiment(model_path: str | Path, experiment_name: str, logging_level: 
 
 
 if __name__ == "__main__":
-    run_experiment("../path/to/model", "experiment_name", "DEBUG")
+    run_experiment("official/test/temp.yml", "official/2027", "DEBUG")
+
 

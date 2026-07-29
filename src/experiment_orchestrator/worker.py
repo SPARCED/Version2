@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from config import BROKER_RANK
+from config.mpi import BROKER_RANK
+
 from runtime.logging import log, log_time
 from runtime.performance import now
+
 
 def worker(comm, rank, size, config):
     t_worker_start = now()
