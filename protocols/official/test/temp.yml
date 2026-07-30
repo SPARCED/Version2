@@ -1,0 +1,28 @@
+# Experiment name
+# Description
+# Last update: 2026-07-24
+
+# Experimental settings
+name: "Experiment name"
+stamp: True
+output_directory: "results"
+population_size: 10
+exchange: 30
+solver: 
+data_path : sbmlpath
+nb_cells: 10
+
+# Protocol steps
+protocol:
+  - step:
+      name: "Pre-incubation"
+      number: 1
+      simulation_mode: "stochastic"
+      duration: 24.0
+      perturbations:
+        - species: "condition"
+        - parameters: None
+        - compartments: None
+        - ratelaws: None
+      starting_point: previous/independent/random sampling
+
