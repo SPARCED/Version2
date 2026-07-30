@@ -6,7 +6,7 @@ from config.mpi import BROKER_RANK
 from runtime.logging import log
 
 
-def broker(comm, rank, size, config):
+def broker(comm, rank, size, context):
     log.info("Broker started")
-    log.debug("Config: %r", config)
+    log.debug("Config: %r", context)
 
