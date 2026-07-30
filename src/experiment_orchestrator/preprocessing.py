@@ -6,9 +6,10 @@ from pathlib import Path
 import yaml
 
 from config.paths import PROTOCOLS_DIR_PATH
+from config.protocol_file_format import PROTOCOL_REQUIRED_KEYS
 
 
-def load_config(protocol_relative_path: str | Path, model_relative_path: str | Path):
+def load_context(protocol_relative_path: str | Path, model_relative_path: str | Path):
     # Resolve paths
     protocol_path = PROTOCOLS_DIR_PATH / Path(protocol_relative_path.lstrip("/\\"))
 
@@ -17,15 +18,16 @@ def load_config(protocol_relative_path: str | Path, model_relative_path: str | P
     if not protocol_path.is_file():
         raise ValueError(f"Given path is not a file")
 
-    # Read configuration
+    # Read context
     with open(protocol_path) as f:
-        config = yaml.safe_load(f)
+        context = yaml.safe_load(f)
 
-    # VALIDATE the config before sending it to all cores!!
-    # required = ["sbml_file", "output_dir"]
-    # for key in required:
-    #   if key not in config:
-    #       raise ValueError(f"Missing configuration key: {key}.")
+    # Validate the context before sending it to all cores!! 
+    if not isinstance(context, dict):
+        raise ValueError("Protocol should be a YAML dictionnary.")
+    missing = [key for key in PROTOCOL_REQUIRED_KEYS if key not in context]
+    if missing:
+        raise ValueError(f"Missing key(s) in protocol: {', '.join(missing)}")
 
-    return config
+    return context
 
