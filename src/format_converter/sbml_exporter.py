@@ -42,6 +42,7 @@ class SBMLExporter:
             return (BQB.IS, f"chebi/{annotation}")
         if re.match(r"^CHEMBL\d+$", annotation):
             return(BQB.IS, f"chembl/{annotation}")
+        return None
 
     def _to_sbmlutils_compartment(self, c: in_house.Compartment) -> Compartment:
         annotation = getattr(c, "annotation", None)
@@ -67,7 +68,10 @@ class SBMLExporter:
     def _to_sbmlutils_species(self, s: in_house.Specie) -> Species:
         annotations = getattr(s, "annotations", None)
         return Species(
-                annotations = [self._resolve_annotation(a) for a in annotations] if annotations else [],
+                annotations = [
+                    a for a in [self._resolve_annotation(annotation) for annotation in annotations]
+                    if a is not None] if annotations else [],
+                #annotations = [self._resolve_annotation(a) for a in annotations] if annotations else [],
                 sid=getattr(s, "id", None),
                 initialConcentration=getattr(s, "initial_concentration", None),
                 compartment=getattr(s, "compartment", None),
@@ -95,5 +99,5 @@ class SBMLExporter:
                 sbml_version=2)
         doc = read_sbml(source=results.sbml_path, validate=False)
         sbml = write_sbml(doc)
-        print(sbml)
+        # print(sbml)
 
