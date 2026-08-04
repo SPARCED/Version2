@@ -35,7 +35,7 @@ def run_experiment(
         raise RuntimeError(f"BROKER_RANK must be in [0, {size-1}].")
 
     try:
-        if rank == 0:
+        if rank == BROKER_RANK:
             context = load_context(protocol_relative_path, model_relative_path)
         else:
             context = None
