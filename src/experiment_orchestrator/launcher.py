@@ -60,6 +60,6 @@ def run_experiment(
 
 
 if __name__ == "__main__":
-    run_experiment("official/test/temp.yml", "official/2027", "DEBUG")
+    run_experiment("official/LinResSims/mini.yml", "official/2027", "DEBUG")
 
 
