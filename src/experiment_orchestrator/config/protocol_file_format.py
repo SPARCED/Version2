@@ -11,8 +11,10 @@ EXTENSION = ".yml"
 # Context keys
 class ProtocolContextKeys(StrEnum):
     NB_CELLS = "nb_cells"
+    PROTOCOL = "protocol"
 
 PROTOCOL_REQUIRED_KEYS = {
-        ProtocolContextKeys.NB_CELLS
+        ProtocolContextKeys.NB_CELLS,
+        ProtocolContextKeys.PROTOCOL
         }
 
