@@ -1,4 +1,4 @@
-Rxn_name	Comp_correction	Ratelaw
+Rxn_name	Comp_correction	Ratelaw						
 vbR	Cytoplasm	kbR_1+(kbR_2*((pS6K^kbR_3)/((kbR_4^kbR_3)+(pS6K^kbR_3))))	0.0042005	0.04	5	4.864145
 vdR	Cytoplasm	2.22319E-06
 vTL1	Nucleus	kTL1_1*m_TP53*(EIF4E/(kTL1_2+EIF4E))	140.7475	100
