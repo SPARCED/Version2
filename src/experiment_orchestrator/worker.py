@@ -14,9 +14,7 @@ from simulation import Simulation
 
 def worker(comm, rank, size, context):
     t_worker_start = now()
-
-    log.info("Worker started")
-    log.debug("Context: %r", context)
+    log.info("Worker started with context: %r", context)
 
     # Deduce from rank assigned list of cells
     nb_cells = context[ProtocolContextKeys.NB_CELLS]
@@ -32,18 +30,12 @@ def worker(comm, rank, size, context):
     protocol = []
 
     for s in context[ProtocolContextKeys.PROTOCOL]:
-        log.debug("Worker loads step: %s", s)
         step = Simulation(**s)
                 # protocol_name=context[ProtocolContextKeys.PROTOCOL_NAME])
                 # output=context[ProtocolContextKeys.OUTPUT_DIR, # a bit more
                 # solver=context[ProtocolContextKeys.SOLVER])
         protocol.append(step)
         log.debug("Worker loaded step: %s", s)
-
-    # Per cell tasks
-    # Handle the FIFO
-    # Read next cell task ans launch simulator
-    # Handle simulator output if necessary
 
     for cell in cell_ids:
         log.debug("Worker takes cell: %d", cell)
@@ -52,6 +44,7 @@ def worker(comm, rank, size, context):
 
         while protocol_queue:
             simulation = protocol_queue.popleft()
+            log.debug(f"Cell nb {cell}: started step {simulation.step_number}")
             #simulation.revolve_some_stuff() # Cell number, effectively grab the data
             #simulation.run()    # Save included, every 100 timepoints
             #status = simulation.status()
