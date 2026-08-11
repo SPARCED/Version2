@@ -10,18 +10,28 @@ EXTENSION = ".yml"
 
 # Context keys
 class ProtocolContextKeys(StrEnum):
+    # Paths, files, directories
     MODEL_FOLDER = "model"
-    NB_CELLS = "nb_cells"
     OUTPUT = "output_directory"
-    PROTOCOL = "protocol"
     PROTOCOL_NAME = "name"
     SBML = "sbml"
+    # Experimental settings
+    NB_CELLS = "nb_cells"
     SOLVER = "solver"
+    # Protocol
+    PROTOCOL = "protocol"
 
 PROTOCOL_REQUIRED_KEYS = {
-        ProtocolContextKeys.NB_CELLS,
-        ProtocolContextKeys.PROTOCOL,
+        ProtocolContextKeys.OUTPUT,
+        ProtocolContextKeys.PROTOCOL_NAME,
         ProtocolContextKeys.SBML,
+        ProtocolContextKeys.NB_CELLS,
         ProtocolContextKeys.SOLVER
         }
+
+VALID_INPUT_KEYS = {"name", "origin", "timepoint"}
+VALID_MODIFICATIONS_KEYS = {"compartments", "parameters", "ratelaws", "species"}
+
+VALID_SIMULATION_MODE_VALUES = {"deterministic", "stochastic", "lineage"}
+VALID_TIMEPOINT_VALUES = {"first", "last", "random"}
 
