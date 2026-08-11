@@ -9,6 +9,8 @@ from config.protocol_file_format import ProtocolContextKeys
 from runtime.logging import log, log_time
 from runtime.performance import now
 
+from simulation import Simulation
+
 
 def worker(comm, rank, size, context):
     t_worker_start = now()
@@ -31,16 +33,12 @@ def worker(comm, rank, size, context):
 
     for s in context[ProtocolContextKeys.PROTOCOL]:
         log.debug("Worker loads step: %s", s)
-        step = 42 # Simulation(**s["step"])
-        # step.set_solver()? or pass it in run?
+        step = Simulation(**s)
+                # protocol_name=context[ProtocolContextKeys.PROTOCOL_NAME])
+                # output=context[ProtocolContextKeys.OUTPUT_DIR, # a bit more
+                # solver=context[ProtocolContextKeys.SOLVER])
         protocol.append(step)
-        # Step loaded as...
-
-        # Where to get data from: path + indication of retrieval
-        # Modifications to perform
-        # Simulation mode
-        # Time and step (start, stop, step)
-        # Storage path
+        log.debug("Worker loaded step: %s", s)
 
     # Per cell tasks
     # Handle the FIFO
