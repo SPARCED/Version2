@@ -1,0 +1,53 @@
+# LinResSims - Alpelisib
+# Replicate alpelisib dose-response of the Mutsuddy 2025 paper
+# Last update: 2026-08-11
+
+# GLOBAL EXPERIMENTAL SETTINGS
+
+# Paths, files, directories
+name: "Alpelisib"
+model: "/official/2025"
+output_directory: "/results/LinResSims"
+sbml:
+  - "sparced_2025_linressims_.xml"
+
+# Experimental settings
+nb_cells: 1000   # 10 replicates of 100 cells
+solver: "SPARCED"
+
+# PROTOCOL STEPS 
+protocol:
+    - step: 3
+      name: "Cell culture (dose 1)"
+      duration: 259200   # 72h
+      input:
+        name: "Control"
+        origin: 2
+        timepoint: "random"
+      modifications:
+        compartments: YES
+        species: drug treatment
+      simulation_mode: "lineage"
+    - step: 4
+      name: "Cell culture (dose 2)"
+      duration: 259200  # 72h
+      input:
+        name: "Control"
+        origin: 2
+        timepoint: "random"
+      modifications:
+        compartments: YES
+        species: drug treatment
+      simulation_mode: "lineage"
+    - step: 5
+      name: "Cell culture (dose 3)"
+      duration: 259200  # 72h
+      input:
+        name: "Control"
+        origin: 2
+        timepoint: "random"    
+      modifications:
+        compartments: YES/NO
+        species: drug treatment
+      simulation_mode: "lineage"
+

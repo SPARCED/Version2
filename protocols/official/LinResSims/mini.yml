@@ -1,0 +1,47 @@
+# LinResSims - Miniature of Control
+# Replicate control dose-response of the Mutsuddy 2025 paper
+# Last update: 2026-08-11
+
+# GLOBAL EXPERIMENTAL SETTINGS
+
+# Paths, files, directories
+name: "Control"
+model: "/official/2025"
+output_directory: "/results/LinResSims"
+sbml:
+  - "sparced_2025_linressims_.xml"
+
+# Experimental settings
+nb_cells: 10   # 10 replicates of 100 cells
+solver: "SPARCED"
+
+# PROTOCOL STEPS 
+protocol:
+    - step: 1
+      name: "Heterogenization"
+      duration: 172800  # 48h
+      input:
+        origin: 0
+      modifications:
+        compartments: YES #TODO add modifications
+      simulation_mode: "stochastic"
+    - step: 2
+      name: "Incubation"
+      duration: 172800  # 48h
+      input:
+        origin: 1
+        timepoint: "last"
+      modifications:
+        # Probably safer to add explicitly compartments?
+        species: YES # TODO: add EGF and insulin
+      simulation_mode: "stochastic"
+    - step: 3
+      name: "Cell culture (control - dose 0)"
+      duration: 259200  # 72h
+      input:
+        origin: 2
+        timepoint: "random"
+      modifications:
+        # Probably safer to add explicitly compartments?
+      simulation_mode: "lineage"
+
