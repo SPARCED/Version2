@@ -10,11 +10,18 @@ EXTENSION = ".yml"
 
 # Context keys
 class ProtocolContextKeys(StrEnum):
+    MODEL_FOLDER = "model"
     NB_CELLS = "nb_cells"
+    OUTPUT = "output_directory"
     PROTOCOL = "protocol"
+    PROTOCOL_NAME = "name"
+    SBML = "sbml"
+    SOLVER = "solver"
 
 PROTOCOL_REQUIRED_KEYS = {
         ProtocolContextKeys.NB_CELLS,
-        ProtocolContextKeys.PROTOCOL
+        ProtocolContextKeys.PROTOCOL,
+        ProtocolContextKeys.SBML,
+        ProtocolContextKeys.SOLVER
         }
 
