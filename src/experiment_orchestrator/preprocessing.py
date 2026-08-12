@@ -9,7 +9,7 @@ from config.paths import PROTOCOLS_DIR_PATH
 from config.protocol_file_format import PROTOCOL_REQUIRED_KEYS
 
 
-def load_context(protocol_relative_path: str | Path, model_relative_path: str | Path):
+def load_context(protocol_relative_path: str | Path):
     # Resolve paths
     protocol_path = PROTOCOLS_DIR_PATH / Path(protocol_relative_path.lstrip("/\\"))
 
