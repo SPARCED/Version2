@@ -29,10 +29,19 @@ PROTOCOL_REQUIRED_KEYS = {
         ProtocolContextKeys.SOLVER
         }
 
+VALID_SOLVER_VALUES = {"AMICI", "BNGSim", "Rover", "SingleCell", "SPARCED", "Tellurium"}
+
+# Step keys
+class ProtocolStepKeys(StrEnum):
+    DURATION = "duration"
+    INPUT = "input"
+    MODIFICATIONS = "modifications"
+    NUMBER = "step"
+    SIMULATION_MODE = "simulation_mode"
+
 VALID_INPUT_KEYS = {"name", "origin", "timepoint"}
 VALID_MODIFICATIONS_KEYS = {"compartments", "parameters", "ratelaws", "species"}
 
 VALID_SIMULATION_MODE_VALUES = {"deterministic", "stochastic", "lineage"}
-VALID_SOLVER_VALUES = {"AMICI", "BNGSim", "Rover", "SingleCell", "SPARCED", "Tellurium"}
 VALID_TIMEPOINT_VALUES = {"first", "last", "random"}
 
