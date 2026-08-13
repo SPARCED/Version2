@@ -33,5 +33,6 @@ VALID_INPUT_KEYS = {"name", "origin", "timepoint"}
 VALID_MODIFICATIONS_KEYS = {"compartments", "parameters", "ratelaws", "species"}
 
 VALID_SIMULATION_MODE_VALUES = {"deterministic", "stochastic", "lineage"}
+VALID_SOLVER_VALUES = {"AMICI", "BNGSim", "Rover", "SingleCell", "SPARCED", "Tellurium"}
 VALID_TIMEPOINT_VALUES = {"first", "last", "random"}
 
