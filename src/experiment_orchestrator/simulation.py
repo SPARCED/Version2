@@ -13,13 +13,33 @@ class Simulation:
         self.name = name
         self.exchange = exchange
 
-        # Load simulation data
-        # Apply modifications (order is extremely important)
-        # Set simulation mode, time, step (start /step / stop)
-        # Storage path could be usefull
+    def retrieve_initial_conditions(self):
+        # Retrieve input data:
+        # - needs output_path from WORKER
+        # - reconstruct input file name from input (name, step)
+        # - gather data depending on timepoint specification
+        # - should be able to handle the step 0 origin
+        pass
+
+    def set_solver_initial_conditions(self):
+        # Load input data:
+        # - needs solver from WORKER
+        # - use wrapper to load input data into solver
+
+        # Apply modifications:
+        # - needs solver from WORKER
+        # - use wrapper to apply modifications data on solver
+        pass
 
     def run(self):
+        # Run simulation
+        # - needs solver and cell_number + output_path from WORKER
+        # - resolve output file name / path
+        # - responsible for calls to simulation wrapper
+        # - use a step by step method (like every 100 steps for example) to make regular saves
+        
+        # Handle the status
+        # - determine simulation status (ALIVE, DEAD, DIVISION)
+        # - return it to WORKER
         pass
-        # Outputs species over time
-        # Sends back status (cell alive, dead, division)
 

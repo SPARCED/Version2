@@ -31,12 +31,10 @@ def worker(comm, rank, size, context):
 
     for s in context[ProtocolContextKeys.PROTOCOL]:
         step = Simulation(**s)
-                # protocol_name=context[ProtocolContextKeys.PROTOCOL_NAME])
-                # output=context[ProtocolContextKeys.OUTPUT_DIR, # a bit more
-                # solver=context[ProtocolContextKeys.SOLVER])
         protocol.append(step)
         log.debug("Worker loaded step: %s", s)
 
+    # Perform protocol on each cell
     for cell in cell_ids:
         log.debug("Worker takes cell: %d", cell)
 
@@ -45,8 +43,11 @@ def worker(comm, rank, size, context):
         while protocol_queue:
             simulation = protocol_queue.popleft()
             log.debug(f"Cell nb {cell}: started step {simulation.step_number}")
-            #simulation.revolve_some_stuff() # Cell number, effectively grab the data
-            #simulation.run()    # Save included, every 100 timepoints
+            
+            simulation.retrieve_initial_conditions()
+            simulation.set_solver_initial_conditions()
+            status = simulation.run()
+            
             #status = simulation.status()
             # if status blablabla -> queue.append()
             # simulation.reset() !!! try finally
