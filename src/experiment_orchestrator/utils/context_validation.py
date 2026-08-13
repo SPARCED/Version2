@@ -8,17 +8,8 @@ from pathlib import Path
 from config.paths import MODELS_DIR_PATH
 from config.protocol_file_format import ProtocolContextKeys, PROTOCOL_REQUIRED_KEYS, VALID_SOLVER_VALUES
 
-
-@dataclass
-class ValidationError:
-    field: str
-    message: str
-
-
-class InvalidContext(Exception):
-    def __init__(self, errors):
-        self.errors = errors
-        super().__init__(f"Protocol validation failed with {len(errors)} error(s).")
+from utils.validation import InvalidContext, ValidationError
+from utils.step_validation import validate_step
 
 
 def validate_model_folder(value):
@@ -49,9 +40,12 @@ def validate_solver(value):
 
     return errors
 
-def validate_protocol(value):
+def validate_protocol(protocol):
     errors = []
-    # validate steps
+
+    for step in protocol:
+        errors.extend(validate_step(step))
+
     return errors
 
 # This is more an example on how validation is implemented than a
