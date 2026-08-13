@@ -8,8 +8,8 @@ from pathlib import Path
 from config.paths import MODELS_DIR_PATH
 from config.protocol_file_format import ProtocolContextKeys, PROTOCOL_REQUIRED_KEYS, VALID_SOLVER_VALUES
 
-from utils.validation import InvalidContext, ValidationError
 from utils.step_validation import validate_step
+from utils.validation import InvalidContext, ValidationError
 
 
 def validate_model_folder(value):
@@ -18,9 +18,9 @@ def validate_model_folder(value):
     model_path = MODELS_DIR_PATH / Path(value.lstrip("/\\"))
 
     if not model_path.exists():
-        errors.append(ValidationError(str(value), "does not exist"))
+        errors.append(ValidationError("model", "does not exist", model_path))
     elif not model_path.is_dir():
-        errors.append(ValidationError(str(value), "is not a directory"))
+        errors.append(ValidationError("model", "is not a directory", model_path))
 
     return errors
 
@@ -28,7 +28,7 @@ def validate_nb_cells(value):
     errors = []
     
     if type(value) is not int or value <= 0:
-        errors.append(ValidationError(str(value), "is not a positive integer"))
+        errors.append(ValidationError("nb_cells", "is not a positive integer", value))
 
     return errors
 
@@ -36,7 +36,7 @@ def validate_solver(value):
     errors = []
     
     if not value in VALID_SOLVER_VALUES:
-        errors.append(ValidationError(str(value), "is not a valid solver"))
+        errors.append(ValidationError("solver", "is not a valid solver", value))
 
     return errors
 
