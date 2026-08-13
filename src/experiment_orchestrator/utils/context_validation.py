@@ -3,9 +3,10 @@
 
 from dataclasses import dataclass
 
-from config.protocol_file_format import ProtocolContextKeys, PROTOCOL_REQUIRED_KEYS
+from pathlib import Path
 
-from runtime.logging import log
+from config.paths import MODELS_DIR_PATH
+from config.protocol_file_format import ProtocolContextKeys, PROTOCOL_REQUIRED_KEYS, VALID_SOLVER_VALUES
 
 
 @dataclass
@@ -22,38 +23,41 @@ class InvalidContext(Exception):
 
 def validate_model_folder(value):
     errors = []
-    return errors
 
-def validate_output(value):
-    errors = []
-    return errors
+    model_path = MODELS_DIR_PATH / Path(value.lstrip("/\\"))
 
-def validate_protocol_name(value):
-    errors = []
-    return errors
+    if not model_path.exists():
+        errors.append(ValidationError(str(value), "does not exist"))
+    elif not model_path.is_dir():
+        errors.append(ValidationError(str(value), "is not a directory"))
 
-def validate_sbml(value):
-    errors = []
     return errors
 
 def validate_nb_cells(value):
     errors = []
+    
+    if type(value) is not int or value <= 0:
+        errors.append(ValidationError(str(value), "is not a positive integer"))
+
     return errors
 
 def validate_solver(value):
     errors = []
+    
+    if not value in VALID_SOLVER_VALUES:
+        errors.append(ValidationError(str(value), "is not a valid solver"))
+
     return errors
 
 def validate_protocol(value):
     errors = []
+    # validate steps
     return errors
 
-
+# This is more an example on how validation is implemented than a
+# complete set of validation functions
 FIELD_VALIDATORS = {
         ProtocolContextKeys.MODEL_FOLDER: validate_model_folder,
-        ProtocolContextKeys.OUTPUT: validate_output,
-        ProtocolContextKeys.PROTOCOL_NAME: validate_protocol_name,
-        ProtocolContextKeys.SBML: validate_sbml,
         ProtocolContextKeys.NB_CELLS: validate_nb_cells,
         ProtocolContextKeys.SOLVER: validate_solver,
         ProtocolContextKeys.PROTOCOL: validate_protocol
