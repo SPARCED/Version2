@@ -7,7 +7,7 @@
         <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.5525390.svg" alt="DOI"/></a></p>
       </body>
     </notes>
-  <model id="sparced_2022_nature_" name="SPARCED 2022 (Nature)
+  <model id="sparced_2022_nat_comm_" name="SPARCED 2022 (Nat comm)
 " substanceUnits="substance" timeUnits="time" volumeUnits="volume">
     <listOfUnitDefinitions>
       <unitDefinition id="nM" name="nanomole/litre">
