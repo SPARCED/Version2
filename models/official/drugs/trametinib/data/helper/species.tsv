@@ -1,0 +1,2 @@
+speciesId	compartment	type	initialConcentration	solver	annotation
+cyt_cong__p_MAPK_	Nucleus	Protein	0.00E+00	Deterministic	P28482,P27361

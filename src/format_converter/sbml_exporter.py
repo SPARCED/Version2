@@ -1,0 +1,103 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pathlib import Path
+from sbmlutils.io import read_sbml, write_sbml, validate_sbml
+
+from sbmlutils.factory import *
+from sbmlutils.metadata import *
+
+from utils.path_validator import PathValidator
+
+import re
+
+import datatypes as in_house
+from data_storage import DataStorage
+
+
+class U(Units):
+    nM=UnitDefinition("nM", "nanomole/litre")
+    substance=UnitDefinition("substance", "nanomole")
+    time=UnitDefinition("time", "second")
+    volume=UnitDefinition("volume", "litre")
+
+
+class SBMLExporter:
+    def __init__(self, root_path: str | Path):
+        self.root_path = PathValidator.directory(root_path)
+
+    def _format_name_to_id(self, name: str):
+        name = name.strip().lower()
+        name = re.sub(r"[^a-z0-9_]", "_", name) # Replace non alphanumeric characters by underscores
+        return re.sub(r"_+", "_", name)         # Remove consecutive underscores
+
+    def _resolve_annotation(self, annotation):
+        if re.match(r"^GO:\d+$", annotation):
+            return (BQB.IS, f"go/{annotation}")
+        if re.match(r"^[OPQ]\d[A-Z0-9]{3}\d(-\d+)?$", annotation):
+            return (BQB.IS, f"uniprot/{annotation}")
+        if re.match(r"^ENS", annotation):
+            return (BQB.IS, f"ensembl/{annotation}")
+        if re.match(r"^CHEBI:\d+$", annotation):
+            return (BQB.IS, f"chebi/{annotation}")
+        if re.match(r"^CHEMBL\d+$", annotation):
+            return(BQB.IS, f"chembl/{annotation}")
+        return None
+
+    def _to_sbmlutils_compartment(self, c: in_house.Compartment) -> Compartment:
+        annotation = getattr(c, "annotation", None)
+        return Compartment(
+                annotations = [self._resolve_annotation(annotation)] if annotation else [],
+                sid=getattr(c, "id", None),
+                unit=U.volume,
+                value=getattr(c, "value", None))
+
+    def _to_sbmlutils_parameters(self, p: in_house.Parameter) -> Parameter:
+        return Parameter(
+                sid=getattr(p, "id", None),
+                value=getattr(p, "value", None))
+    
+    def _to_sbmlutils_reactions(self, r: in_house.Reaction) -> Reaction:
+        return Reaction(
+                sid=getattr(r, "id", None),
+                equation=getattr(r, "equation", None),
+                formula=("(" + getattr(r, "formula", None)+")*"
+                    + getattr(r, "compartment", None) , None)
+                )
+    
+    def _to_sbmlutils_species(self, s: in_house.Specie) -> Species:
+        annotations = getattr(s, "annotations", None)
+        return Species(
+                annotations = [
+                    a for a in [self._resolve_annotation(annotation) for annotation in annotations]
+                    if a is not None] if annotations else [],
+                #annotations = [self._resolve_annotation(a) for a in annotations] if annotations else [],
+                sid=getattr(s, "id", None),
+                initialConcentration=getattr(s, "initial_concentration", None),
+                compartment=getattr(s, "compartment", None),
+                hasOnlySubstanceUnits=False)
+
+    def to_sbml(self, data: DataStorage):
+        model = Model(
+                self._format_name_to_id(data.model_name),
+                name=data.model_name,
+                units=U,
+                model_units=ModelUnits(
+                    time=U.time,
+                    substance=U.substance,
+                    volume=U.volume),
+                compartments = [self._to_sbmlutils_compartment(c) for c in data.compartments],
+                species = [self._to_sbmlutils_species(s) for s in data.species],
+                parameters = [self._to_sbmlutils_parameters(p) for p in data.parameters],
+                reactions = [self._to_sbmlutils_reactions(r) for r in data.ratelaws]
+                )
+        results = create_model(
+                model=model,
+                filepath=Path(self.root_path) / f"{model.sid}.xml",
+                validation_options=ValidationOptions(units_consistency=False),
+                sbml_level=3,
+                sbml_version=2)
+        doc = read_sbml(source=results.sbml_path, validate=False)
+        sbml = write_sbml(doc)
+        # print(sbml)
+
