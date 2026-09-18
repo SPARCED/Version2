@@ -1,5 +1,5 @@
 format_version: 1 
-parameter_file: ../../model/Parameters-v1.1.tsv
+parameter_file: ../../../models/official/stochastic-gene-expression-v1.4.2/data/parameters.tsv
 problems:
   - name: "survival-signaling"
     condition_files: 
@@ -9,7 +9,7 @@ problems:
     observable_files:
     - observables.tsv
     sbml_files:
-    - ../../model/GS_SPARCED_v1.xml
+    - ../../../models/official/stochastic-gene-expression-v1.4.2/stochastic_gene_expression_v1_4_2.xml
     cell_count: 1
     solver: bngsim
     
