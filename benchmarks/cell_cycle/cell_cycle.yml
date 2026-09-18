@@ -1,0 +1,14 @@
+format_version: 1 
+parameter_file: ../../model/Parameters-v1.1.tsv
+problems: 
+  - name: cell-cycle
+    condition_files: 
+    - conditions.tsv
+    measurement_files:
+    - measurements.tsv
+    observable_files:
+    - observables.tsv
+    sbml_files:
+    - ../../model/GS_SPARCED_v1.xml
+    cell_count: 1
+    solver: bngsim

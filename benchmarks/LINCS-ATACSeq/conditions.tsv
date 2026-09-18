@@ -1,0 +1,7 @@
+conditionId	exc_prot__EGF_1_	exc_prot__HGF_1_	exc_prot__IFNG_1_	exc_cong__IGF_
+heterogenize	0.0	0.0	0.0	0.0
+serum_fed_equilibrium	9.82E-17	2.47E-15	0	0.02
+EGF	1.5625	2.47E-15	0	0.02
+HGF only	9.82E-17	416.67	0	0.02
+IFNG_EGF	1.5625	2.47E-15	1197.6047904191619	0.02
+PBS only	9.82E-17	2.47E-15	0	0.02

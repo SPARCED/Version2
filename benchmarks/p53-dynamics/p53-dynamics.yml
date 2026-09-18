@@ -1,0 +1,15 @@
+format_version: 1 
+parameter_file: ../../model/Parameters-v1.1.tsv
+problems: 
+  - name: p53-dynamics
+    condition_files: 
+    - conditions.tsv
+    measurement_files:
+    - measurements.tsv
+    observable_files:
+    - observables.tsv
+    sbml_files:   
+    - ../../model/deterministic-interactions-v2.xml
+    - ../../model/stochastic-gene-expression-v2.xml
+    cell_count: 20
+    solver: rover
