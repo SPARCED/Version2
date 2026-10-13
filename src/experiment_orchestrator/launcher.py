@@ -44,9 +44,9 @@ def run_experiment(
 
     # Broadcast context
     t_bcast_start = now()
-    context = comm.bcast(context, root=0)
+    context = comm.bcast(context, root=BROKER_RANK)
     t_bcast_stop = now() - t_bcast_start
-    log_time("bcast: %f", t_bcast_stop) 
+    log_time("bcast: %f", t_bcast_stop)
 
     
     if rank == BROKER_RANK:
