@@ -1,6 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from enum import StrEnum, auto
+
+from runtime.logging import log
+
+
+class SimulationStatus(StrEnum):
+    INITIAL = auto()
+    LOADING = auto()
+    LOADED = auto()
+    MODIFYING = auto()
+    MODIFIED = auto()
+    RUNNING = auto()
+    APOPTOSIS = auto()
+    MITOSIS = auto()
+    ENDED = auto()
 
 class Simulation:
 
@@ -12,6 +27,11 @@ class Simulation:
         self.modifications = modifications or {}
         self.name = name
         self.exchange = exchange
+        
+        self.status = SimulationStatus.INITIAL
+
+    def _log_status(self):
+        log.debug("Step %d (%s) is %s.", self.step_number, self.name, self.status)
 
     def retrieve_initial_conditions(self):
         # Retrieve input data:
@@ -42,4 +62,10 @@ class Simulation:
         # - determine simulation status (ALIVE, DEAD, DIVISION)
         # - return it to WORKER
         pass
+
+    def reset(self):
+        # Revert here any changes made to the object
+        self.status = SimulationStatus.INITIAL
+        self._log_status()
+
 

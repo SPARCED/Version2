@@ -10,6 +10,7 @@ from runtime.logging import log, log_time
 from runtime.performance import now
 
 from simulation import Simulation
+from simulation import SimulationStatus
 
 
 def worker(comm, rank, size, context):
@@ -44,13 +45,17 @@ def worker(comm, rank, size, context):
             simulation = protocol_queue.popleft()
             log.debug(f"Cell nb {cell}: started step {simulation.step_number}")
             
-            simulation.retrieve_initial_conditions()
-            simulation.set_solver_initial_conditions()
-            status = simulation.run()
-            
-            #status = simulation.status()
-            # if status blablabla -> queue.append()
-            # simulation.reset() !!! try finally
+            try:
+                simulation.retrieve_initial_conditions()
+                simulation.set_solver_initial_conditions()
+                status = simulation.run()
+                #status = simulation.status()
+                # if status blablabla -> queue.append()
+                if status == SimulationStatus.MITOSIS:
+                    # protocol_queue.append()
+                    pass
+            finally:
+                simulation.reset()
 
     t_worker_stop = now() - t_worker_start
     log_time("worker: %f", t_worker_stop)
