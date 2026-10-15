@@ -7,7 +7,7 @@
 # Paths, files, directories
 name: "Control"
 model: "/official/2025"
-output_directory: "/results/LinResSims"
+output_directory: "/results/dev"
 sbml:
   - "sparced_2025_linressims_.xml"
 
