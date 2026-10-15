@@ -42,6 +42,20 @@ class ProtocolStepKeys(StrEnum):
 VALID_INPUT_KEYS = {"name", "origin", "timepoint"}
 VALID_MODIFICATIONS_KEYS = {"compartments", "parameters", "ratelaws", "species"}
 
+# Origin value reserved for reloading from SBML
+RESERVED_ORIGIN_VALUE = 0
+
 VALID_SIMULATION_MODE_VALUES = {"deterministic", "stochastic", "lineage"}
-VALID_TIMEPOINT_VALUES = {"first", "last", "random"}
+
+# Timepoint values
+class ProtocolTimepointValues(StrEnum):
+    FIRST = "first"
+    LAST = "last"
+    RANDOM = "random"
+
+VALID_TIMEPOINT_VALUES = {
+        ProtocolTimepointValues.FIRST,
+        ProtocolTimepointValues.LAST,
+        ProtocolTimepointValues.RANDOM
+        }
 
