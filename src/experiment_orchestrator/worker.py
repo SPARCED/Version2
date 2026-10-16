@@ -7,7 +7,7 @@ from pathlib import Path
 
 from config.mpi import BROKER_RANK
 from config.paths import MODELS_DIR_PATH
-from config.protocol_file_format import ProtocolContextKeys
+from config.protocol_file_format import ProtocolContextKeys, RESERVED_ORIGIN_VALUE
 
 from runtime.logging import log, log_time
 from runtime.performance import now
@@ -40,7 +40,7 @@ def worker(comm, rank, size, context):
     protocol = []
 
     for s in context[ProtocolContextKeys.PROTOCOL]:
-        step = Simulation(**s)
+        step = Simulation(s, context[ProtocolContextKeys.PROTOCOL_NAME])
         protocol.append(step)
         log.debug("Worker loaded step: %s", s)
 
@@ -52,11 +52,11 @@ def worker(comm, rank, size, context):
 
         while protocol_queue:
             simulation = protocol_queue.popleft()
-            log.debug(f"Cell nb {cell}: started step {simulation.step_number}")
+            log.debug(f"Cell nb {cell}: started step {simulation.infos.step}")
             
             try:
                 # Load initial conditions
-                if simulation.from_origin:
+                if simulation.infos.input["origin"] == RESERVED_ORIGIN_VALUE:
                     # Load from SBML
                     pass
                 else:
