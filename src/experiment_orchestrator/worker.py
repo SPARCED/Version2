@@ -3,7 +3,10 @@
 
 from collections import deque
 
+from pathlib import Path
+
 from config.mpi import BROKER_RANK
+from config.paths import MODELS_DIR_PATH
 from config.protocol_file_format import ProtocolContextKeys
 
 from runtime.logging import log, log_time
@@ -12,10 +15,16 @@ from runtime.performance import now
 from simulation import Simulation
 from simulation import SimulationStatus
 
+from utils.path_validator import PathValidator
+
 
 def worker(comm, rank, size, context):
     t_worker_start = now()
     log.info("Worker started with context: %r", context)
+
+    # Reconstruct paths
+    model_path = PathValidator.directory(MODELS_DIR_PATH / Path(context[ProtocolContextKeys.MODEL_FOLDER].lstrip("\//")))
+    output_path = PathValidator.directory(model_path / Path(context[ProtocolContextKeys.OUTPUT].lstrip("\//")))
 
     # Deduce from rank assigned list of cells
     nb_cells = context[ProtocolContextKeys.NB_CELLS]
@@ -46,14 +55,19 @@ def worker(comm, rank, size, context):
             log.debug(f"Cell nb {cell}: started step {simulation.step_number}")
             
             try:
-                simulation.retrieve_initial_conditions()
-                simulation.set_solver_initial_conditions()
-                status = simulation.run()
-                #status = simulation.status()
-                # if status blablabla -> queue.append()
-                if status == SimulationStatus.MITOSIS:
-                    # protocol_queue.append()
+                # Load initial conditions
+                if simulation.from_origin:
+                    # Load from SBML
                     pass
+                else:
+                    simulation.load_initial_conditions(context[ProtocolContextKeys.PROTOCOL_NAME], output_path, cell)
+                # Load modifications
+                simulation.load_modifications()
+                # Run
+                status = simulation.run()
+                if status == SimulationStatus.MITOSIS:
+                    # TODO: see in your notebook how to handle daughter cells
+                    log.debug("Mitosis occured")
             finally:
                 simulation.reset()
 
