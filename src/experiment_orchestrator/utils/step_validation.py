@@ -1,7 +1,7 @@
 #!usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from config.protocol_file_format import ProtocolStepKeys, VALID_INPUT_KEYS, VALID_MODIFICATIONS_KEYS, VALID_SIMULATION_MODE_VALUES, VALID_TIMEPOINT_VALUES
+from config.protocol_file_format import ProtocolStepKeys, VALID_INPUT_KEYS, VALID_MODIFICATIONS_KEYS, RESERVED_ORIGIN_VALUE, VALID_SIMULATION_MODE_VALUES, VALID_TIMEPOINT_VALUES
 
 from utils.validation import ValidationError
 
@@ -20,6 +20,7 @@ def validate_step_input(value):
     unknown = set(value) - VALID_INPUT_KEYS
     if unknown:
         errors.append(ValidationError(unknown, "unknown input key"))
+
     if "timepoint" in value and not value["timepoint"] in VALID_TIMEPOINT_VALUES:
         errors.append(ValidationError("timepoint", "is not a valid timepoint", value["timepoint"]))
 
@@ -48,6 +49,8 @@ def validate_step_number(value):
 
     if type(value) is not int or value <= 0:
         errors.append(ValidationError("step number", "is not a positive integer", value))
+    if value == RESERVED_ORIGIN_VALUE:
+        errors.append(ValidationError("step number", "is reserved", value))
 
     return errors
 
