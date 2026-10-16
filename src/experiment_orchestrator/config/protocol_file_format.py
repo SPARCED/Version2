@@ -29,18 +29,35 @@ PROTOCOL_REQUIRED_KEYS = {
         ProtocolContextKeys.SOLVER
         }
 
+# Context values
 VALID_SOLVER_VALUES = {"AMICI", "BNGSim", "Rover", "SingleCell", "SPARCED", "Tellurium"}
 
 # Step keys
 class ProtocolStepKeys(StrEnum):
     DURATION = "duration"
+    EXCHANGE = "exchange"
     INPUT = "input"
     MODIFICATIONS = "modifications"
+    NAME = "name"
     NUMBER = "step"
     SIMULATION_MODE = "simulation_mode"
 
 VALID_INPUT_KEYS = {"name", "origin", "timepoint"}
 VALID_MODIFICATIONS_KEYS = {"compartments", "parameters", "ratelaws", "species"}
+
+STEP_REQUIRED_KEYS = {
+        ProtocolStepKeys.DURATION,
+        ProtocolStepKeys.SIMULATION_MODE
+        }
+
+# Step values
+DefaultStepValues = {
+        ProtocolStepKeys.EXCHANGE: 30,
+        ProtocolStepKeys.INPUT: {},
+        ProtocolStepKeys.MODIFICATIONS: {},
+        ProtocolStepKeys.NAME: None,
+        ProtocolStepKeys.NUMBER: None
+        }
 
 # Origin value reserved for reloading from SBML
 RESERVED_ORIGIN_VALUE = 0

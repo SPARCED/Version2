@@ -1,6 +1,8 @@
 #!usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# TODO: duration and simulation mode (DSLt) should be required
+
 from config.protocol_file_format import ProtocolStepKeys, VALID_INPUT_KEYS, VALID_MODIFICATIONS_KEYS, RESERVED_ORIGIN_VALUE, VALID_SIMULATION_MODE_VALUES, VALID_TIMEPOINT_VALUES
 
 from utils.validation import ValidationError
