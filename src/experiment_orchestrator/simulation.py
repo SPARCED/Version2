@@ -14,9 +14,7 @@ from runtime.logging import log
 
 class SimulationStatus(StrEnum):
     INITIAL = auto()
-    LOADING = auto()
     LOADED = auto()
-    MODIFYING = auto()
     MODIFIED = auto()
     RUNNING = auto()
     APOPTOSIS = auto()
@@ -37,20 +35,18 @@ class Simulation:
             self.infos.input.setdefault("timepoint", ProtocolTimepointValues.FIRST)
         # State variables
         self.status = SimulationStatus.INITIAL
+        self._log_status()
 
     def _log_status(self):
         log.debug("Step %d (%s) is %s.", self.infos.step, self.infos.name, self.status)
  
     def load_initial_conditions(self, protocol_name, output_path, cell_nb):
-        self.status = SimulationStatus.LOADING
-
         # Don't reload previous step
         if self.infos.step is not None and all(
                 (self.infos.input["name"] == protocol_name,
                  self.infos.input["origin"] == self.infos.step - 1,
                  self.infos.input["timepoint"] == ProtocolTimepointValues.LAST)):
-                    self.status = SimulationStatus.LOADED
-                    self._log_status()
+                    pass
         
         input_file = output_path / f"{self.infos.input['name']}_{self.infos.input['origin']}_{cell_nb}"
         # Open file
@@ -59,7 +55,9 @@ class Simulation:
 
         # WARNING: The design currently doesn't support loading anything else than species concentrations.
         # TODO: check for existence of parameter files to upload
-        pass
+        
+        self.status = SimulationStatus.LOADED
+        self._log_status()
 
     def load_modifications(self):
         # Load input data:
