@@ -23,8 +23,9 @@ class SimulationStatus(StrEnum):
 
 class Simulation:
 
-    def __init__(self, details, protocol_name):
+    def __init__(self, details, protocol_name, generation):
         self.infos = SimpleNamespace(**(DefaultStepValues | details))
+        self.generation = generation
         # Set default values to all input fields -- TODO: refactor in a function
         self.infos.input.setdefault("name", protocol_name)
         if self.infos.step is not None:

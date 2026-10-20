@@ -40,13 +40,17 @@ def worker(comm, rank, size, context):
     protocol = []
 
     for s in context[ProtocolContextKeys.PROTOCOL]:
-        step = Simulation(s, context[ProtocolContextKeys.PROTOCOL_NAME])
+        step = Simulation(s, context[ProtocolContextKeys.PROTOCOL_NAME], 0)
         protocol.append(step)
         log.debug("Worker loaded step: %s", s)
 
     # Perform protocol on each cell
     for cell in cell_ids:
         log.debug("Worker takes cell: %d", cell)
+        
+        if cell > nb_cells:
+            log.debug("Lineage tracing is not implemented yet.")
+            continue
 
         protocol_queue = deque(protocol)    # WARNING: Shallow copy, always reset the objects afterwards
 
@@ -65,9 +69,13 @@ def worker(comm, rank, size, context):
                 simulation.load_modifications()
                 # Run
                 status = simulation.run()
+                # Apoptosis - Empty queue, as the next protocol steps are not applicable anymore
+                if status ==  SimulationStatus.APOPTOSIS:
+                    protocol_queue.clear()
+                # Mitosis - Add daughter cell ids to list of cell to simulate
                 if status == SimulationStatus.MITOSIS:
-                    # TODO: see in your notebook how to handle daughter cells
-                    log.debug("Mitosis occured")
+                    cell_ids.append(cell + pow(2, simulation.generation)*nb_cells)
+                    cell_ids.append(cell + pow(2, simulation.generation+1)*nb_cells)
             finally:
                 simulation.reset()
 
