@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from collections import deque
+from copy import deepcopy
 
 from pathlib import Path
 
@@ -44,6 +45,8 @@ def worker(comm, rank, size, context):
         protocol.append(step)
         log.debug("Worker loaded step: %s", s)
 
+    lineage_tracing = {}
+
     # Perform protocol on each cell
     for cell in cell_ids:
         log.debug("Worker takes cell: %d", cell)
@@ -74,8 +77,14 @@ def worker(comm, rank, size, context):
                     protocol_queue.clear()
                 # Mitosis - Add daughter cell ids to list of cell to simulate
                 if status == SimulationStatus.MITOSIS:
-                    cell_ids.append(cell + pow(2, simulation.generation)*nb_cells)
-                    cell_ids.append(cell + pow(2, simulation.generation+1)*nb_cells)
+                    daughter_1 = cell + pow(2, simulation.generation)*nb_cells
+                    daughter_2 = cell + pow(2, simulation.generation+1)*nb_cells
+                    # TODO: there are some updates to do on the copies, especially the generation and input data
+                    lineage_tracing[daughter_1] = deepcopy(protocol_queue)
+                    lineage_tracing[daughter_2] = deepcopy(protocol_queue)
+                    # To remove later as the dictionnary should be sufficient to handle lineage tracing
+                    cell_ids.append(daughter_1)
+                    cell_ids.append(daughter_2)
             finally:
                 simulation.reset()
 
