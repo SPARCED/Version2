@@ -1,4 +1,7 @@
-"""BNGSim ODE simulator wrapper."""
+# BNGSim ODE simulator wrapper
+# This file originates from Benchtop (f25d654)
+# Written by Jonah R. Huggins
+# Adapted by Aurore K. Amrit
 
 import logging
 
