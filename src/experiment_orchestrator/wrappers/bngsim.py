@@ -7,7 +7,7 @@ import bngsim
 import numpy as np
 import pandas as pd
 
-from benchtop._abstract_simulator import AbstractSimulator
+from _abstract_simulator import AbstractSimulator
 
 from runtime.logging import log
 
