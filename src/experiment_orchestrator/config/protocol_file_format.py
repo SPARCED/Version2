@@ -31,7 +31,7 @@ PROTOCOL_REQUIRED_KEYS = {
 
 # Context values
 # TODO: replace with SIMULATOR_REGISTRY
-VALID_SOLVER_VALUES = {"AMICI", "BNGSim", "Rover", "SingleCell", "SPARCED", "Tellurium"}
+VALID_SOLVER_VALUES = {"AMICI", "bngsim", "Rover", "SingleCell", "SPARCED", "Tellurium"}
 
 # Step keys
 class ProtocolStepKeys(StrEnum):

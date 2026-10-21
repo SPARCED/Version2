@@ -13,7 +13,7 @@ sbml:
 
 # Experimental settings
 nb_cells: 10   # 10 replicates of 100 cells
-solver: "SPARCED"
+solver: "bngsim"
 
 # PROTOCOL STEPS 
 protocol:
