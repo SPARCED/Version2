@@ -13,6 +13,7 @@ from config.protocol_file_format import ProtocolContextKeys, RESERVED_ORIGIN_VAL
 from runtime.logging import log, log_time
 from runtime.performance import now
 
+from simulation._load_solver import load_solver
 from simulation.step import SimulationStep
 from simulation.step import SimulationStatus
 
@@ -34,6 +35,8 @@ def worker(comm, rank, size, context):
     cell_ids = [c for c in range(rank, nb_cells+1, nb_workers)]
     log.debug("Worker got assigned the following cells: %s", cell_ids)
 
+    # Setup solver
+    solver = load_solver(context[ProtocolContextKeys.SOLVER])
     # TODO: setup solver (reading SBML is dependent on chosen solver)
     # Could still be nice to store initial state if possible
 
@@ -41,7 +44,7 @@ def worker(comm, rank, size, context):
     protocol = []
 
     for s in context[ProtocolContextKeys.PROTOCOL]:
-        step = Simulation(s, context[ProtocolContextKeys.PROTOCOL_NAME], 0)
+        step = SimulationStep(s, context[ProtocolContextKeys.PROTOCOL_NAME], 0)
         protocol.append(step)
         log.debug("Worker loaded step: %s", s)
 
