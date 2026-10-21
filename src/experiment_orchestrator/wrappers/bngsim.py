@@ -4,10 +4,10 @@
 # Adapted by Aurore K. Amrit
 
 import bngsim
-import numpy as np
-import pandas as pd
+# import numpy as np
+# import pandas as pd
 
-from simulation._abstract_simulator import AbstractSolver
+from simulation._abstract_solver import AbstractSolver
 
 from runtime.logging import log
 
