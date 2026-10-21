@@ -21,7 +21,7 @@ class SimulationStatus(StrEnum):
     FINISHED = auto()
     MITOSIS = auto()
 
-class Simulation:
+class SimulationStep:
 
     def __init__(self, details, protocol_name, generation):
         self.infos = SimpleNamespace(**(DefaultStepValues | details))
@@ -80,11 +80,12 @@ class Simulation:
         # Handle the status
         # - determine simulation status (ALIVE, DEAD, DIVISION)
         # - return it to WORKER
+        if self.generation > 2:
+            return SimulationStatus.APOPTOSIS
         return random.choice([SimulationStatus.APOPTOSIS, SimulationStatus.FINISHED, SimulationStatus.MITOSIS])
 
     def reset(self):
         # Revert here any changes made to the object
         self.status = SimulationStatus.INITIAL
         self._log_status()
-
 

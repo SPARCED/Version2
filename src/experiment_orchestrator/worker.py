@@ -13,8 +13,8 @@ from config.protocol_file_format import ProtocolContextKeys, RESERVED_ORIGIN_VAL
 from runtime.logging import log, log_time
 from runtime.performance import now
 
-from simulation import Simulation
-from simulation import SimulationStatus
+from simulation.step import SimulationStep
+from simulation.step import SimulationStatus
 
 from utils.path_validator import PathValidator
 
