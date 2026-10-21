@@ -3,19 +3,13 @@
 # Written by Jonah R. Huggins
 # Adapted by Aurore K. Amrit
 
-import logging
-
 import bngsim
 import numpy as np
 import pandas as pd
 
 from benchtop._abstract_simulator import AbstractSimulator
 
-logging.basicConfig(
-    level=logging.DEBUG,
-    format="%(asctime)s - %(levelname)s - %(message)s",
-)
-logger = logging.getLogger(__name__)
+from runtime.logging import log
 
 
 class BNGSimSimulator(AbstractSimulator):
@@ -41,7 +35,7 @@ class BNGSimSimulator(AbstractSimulator):
         )
 
     def modify(self, component: str, value: int | float) -> None:
-        logger.debug("Setting %s = %s", component, value)
+        log.debug("Setting %s = %s", component, value)
         try:
             if component in self.tool.param_names:
                 self.tool.set_param(component, float(value))
