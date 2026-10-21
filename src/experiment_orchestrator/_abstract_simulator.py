@@ -1,4 +1,6 @@
-"""Abstract base class for simulator wrappers (Tellurium, AMICI, etc.)."""
+# Abstract base class for simulator wrappers (Tellurium, AMICI, etc.).
+# This file originates from Benchtop (f25d654)
+# Written by Jonah R. Huggins
 
 from abc import ABC, abstractmethod
 from types import ModuleType
