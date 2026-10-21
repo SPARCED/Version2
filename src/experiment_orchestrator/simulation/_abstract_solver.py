@@ -6,7 +6,7 @@ from abc import ABC, abstractmethod
 from types import ModuleType
 
 
-class AbstractSimulator(ABC):
+class AbstractSolver(ABC):
     """Interface: load model, modify state, simulate over a time grid."""
 
     def __init__(self, *args, **kwargs):
