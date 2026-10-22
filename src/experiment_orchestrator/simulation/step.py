@@ -26,21 +26,30 @@ class SimulationStep:
     def __init__(self, details, protocol_name, generation):
         self.infos = SimpleNamespace(**(DefaultStepValues | details))
         self.generation = generation
-        # Set default values to all input fields -- TODO: refactor in a function
-        self.infos.input.setdefault("name", protocol_name)
-        if self.infos.step is not None:
-            self.infos.input.setdefault("origin", self.infos.step-1)
-            self.infos.input.setdefault("timepoint", ProtocolTimepointValues.LAST)
-        else:
-            self.infos.input.setdefault("origin", RESERVED_ORIGIN_VALUE)
-            self.infos.input.setdefault("timepoint", ProtocolTimepointValues.FIRST)
+        # Set default values to all input fields & evaluate input type
+        origin = {"name": protocol_name, "origin": RESERVED_ORIGIN_VALUE, "timepoint": ProtocolTimepointValues.FIRST }
+        previous = {"name": protocol_name, "origin": self.infos.step-1, "timepoint": ProtocolTimepointValues.LAST }
+        self._set_input_fields(origin, previous)
+        self.is_from_origin = self._input_is_from(origin)
+        self.is_from_previous = self._input_is_from(previous)
         # State variables
         self.status = SimulationStatus.INITIAL
         self._log_status()
 
+    def _input_is_from(self, tested):
+        return all(self.infos.input[k] == tested[k] for k in tested)
+
     def _log_status(self):
         log.debug("Step %d (%s) is %s.", self.infos.step, self.infos.name, self.status)
- 
+
+    def _set_input_fields(self, origin, previous):
+        if self.infos.input is not None:
+            for k, v in previous.items():
+                self.infos.input.setdefault(k, v)
+        else:
+            for k, v in origin.items():
+                self.infos.input.setdefault(k, v)
+
     def load_initial_conditions(self, protocol_name, output_path, cell_nb):
         # Don't reload previous step
         if self.infos.step is not None and all(

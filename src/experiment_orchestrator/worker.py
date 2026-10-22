@@ -6,9 +6,8 @@ from copy import deepcopy
 
 from pathlib import Path
 
-from config.mpi import BROKER_RANK
 from config.paths import MODELS_DIR_PATH
-from config.protocol_file_format import ProtocolContextKeys, RESERVED_ORIGIN_VALUE
+from config.protocol_file_format import ProtocolContextKeys
 
 from runtime.logging import log, log_time
 from runtime.performance import now
@@ -75,7 +74,7 @@ def worker(comm, rank, size, context):
             
             try:
                 # Load initial conditions
-                if simulation.infos.input["origin"] == RESERVED_ORIGIN_VALUE:
+                if simulation.is_from_origin:
                     # Load from SBML
                     pass
                 else:
