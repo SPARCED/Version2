@@ -30,12 +30,12 @@ with open("../legacy/Ratelaws.txt", newline="", encoding="utf-8") as fin, \
 
         values = [v.strip() for v in row[ratelaw_idx + 1:] if v.strip()]
 
-        # Cas d'une constante directement dans la ratelaw
+        # Constant as ratelaw
         if NUMBER_RE.fullmatch(ratelaw):
             parameter = f"k{reaction}"
 
             if parameter not in known_parameters:
-                writer.writerow([reaction, parameter, ratelaw])
+                writer.writerow([reaction, parameter, "lin", ratelaw, ratelaw, ratelaw, 0])
                 known_parameters.add(parameter)
 
             continue
