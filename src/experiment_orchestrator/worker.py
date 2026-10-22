@@ -20,6 +20,9 @@ from simulation.step import SimulationStatus
 from utils.path_validator import PathValidator
 
 
+# TODO remove this debug
+from types import SimpleNamespace
+
 def worker(comm, rank, size, context):
     t_worker_start = now()
     log.info("Worker started with context: %r", context)
@@ -27,7 +30,8 @@ def worker(comm, rank, size, context):
     # Reconstruct paths
     model_path = PathValidator.directory(MODELS_DIR_PATH / Path(context[ProtocolContextKeys.MODEL_FOLDER].lstrip("\//")))
     output_path = PathValidator.directory(model_path / Path(context[ProtocolContextKeys.OUTPUT].lstrip("\//")))
-
+    sbml_paths = [model_path / sbml_name.lstrip("\//") for sbml_name in context[ProtocolContextKeys.SBML]]
+    
     # Deduce from rank assigned list of cells
     nb_cells = context[ProtocolContextKeys.NB_CELLS]
     nb_workers = size - 1
@@ -36,8 +40,13 @@ def worker(comm, rank, size, context):
     log.debug("Worker got assigned the following cells: %s", cell_ids)
 
     # Setup solver
-    solver = load_solver(context[ProtocolContextKeys.SOLVER])
-    # TODO: setup solver (reading SBML is dependent on chosen solver)
+    solver_class = load_solver(context[ProtocolContextKeys.SOLVER])
+    args = SimpleNamespace(model_paths=sbml_paths)
+    solver = solver_class(args)
+    # Load SBML
+    # WARNING: by default, the wrappers consider the first file as deterministic and the second as stochastic.
+    # This implicit behavior should either be corrected or documented.
+    solver.load(args)
     # Could still be nice to store initial state if possible
 
     # Build protocol (create original FIFO)
