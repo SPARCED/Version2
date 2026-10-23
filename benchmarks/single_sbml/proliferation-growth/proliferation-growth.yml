@@ -1,0 +1,14 @@
+format_version: 1 
+parameter_file: ../../../models/official/stochastic-gene-expression-v1.4.2/data/parameters.tsv
+problems: 
+  - name: proliferation-growth
+    condition_files: 
+    - conditions.tsv
+    measurement_files:
+    - measurements.tsv
+    observable_files:
+    - observables-v1.4.2.tsv
+    sbml_files:
+    - ../../../models/official/stochastic-gene-expression-v1.4.2/stochastic_gene_expression_v1_4_2.xml
+    cell_count: 1
+    solver: bngsim

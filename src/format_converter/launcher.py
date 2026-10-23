@@ -25,5 +25,5 @@ def convert_model(relative_path: str | Path):
     exporter.to_sbml(model_data)
 
 if __name__ == "__main__":
-    convert_model("/official/2027")
+    convert_model("/official/stochastic-gene-expression-v1.4.2")
 

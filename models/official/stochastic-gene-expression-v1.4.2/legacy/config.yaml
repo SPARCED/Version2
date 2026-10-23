@@ -1,0 +1,19 @@
+swap_files: # Swapping version 1.4.1 to v1.4.2
+  old: 
+    filename: "swap-reference.txt" # The primary reference file(s)
+    column: "v1.4.1"
+    datatype: "string"
+  new:
+    filename: "swap-reference.txt" # The primary reference file(s)
+    column: "v1.4.2"
+    datatype: "string"
+  update:
+      file1:
+        filename: "../../SPARCED-PEtab-benchmarks/stochastic-expression/observables.tsv"
+        output: "../../SPARCED-PEtab-benchmarks/stochastic-expression/observables-v142.tsv"
+  
+  inspect: 
+      file1: "SPARCED-Species.tsv"
+      file2: "SPARCED-Ratelaws.tsv"
+      file3: "SPARCED-Parameters.tsv"
+      file4: "SPARCED-Annotations.tsv"

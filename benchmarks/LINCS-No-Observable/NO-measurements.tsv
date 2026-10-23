@@ -1,0 +1,7 @@
+observableId	preequilibrationConditionId	simulationConditionId	measurement	time
+blank		heterogenize		172800.0
+blank	heterogenize	serum_fed_equilibrium		64800.0
+blank	serum_fed_equilibrium	EGF		172800.0
+blank	serum_fed_equilibrium	HGF only		172800.0
+blank	serum_fed_equilibrium	IFNG_EGF		172800.0
+blank	serum_fed_equilibrium	PBS only		172800.0

@@ -1,0 +1,15 @@
+format_version: 1 
+parameter_file: ../../model/Parameters-v1.1.tsv
+problems: 
+  - name: TRAIL-percent-death
+    condition_files: 
+    - conditions.tsv
+    measurement_files:
+    - measurements.tsv
+    observable_files:
+    - observables.tsv
+    sbml_files:   
+    - ../../model/deterministic-interactions-v1.1.xml
+    - ../../model/stochastic-gene-expression-v1.1.xml
+    cell_count: 10
+    solver: rover

@@ -1,0 +1,17 @@
+observableId	preequilibrationConditionId	simulationConditionId	measurement	time
+blank		heterogenize	None	86400
+cycA_Cdk2_total	heterogenize	EGF_only	None	108000
+cycA_Cdk2_total	heterogenize	INS_only	None	108000
+cycA_Cdk2_total	heterogenize	EGF_INS	None	108000
+cycA_Cdk2_total	heterogenize	EGF_INS_MEKi	None	108000
+cycA_Cdk2_total	heterogenize	EGF_INS_AKTi	None	108000
+Sphase	heterogenize	EGF_only	None	108000
+Sphase	heterogenize	INS_only	None	108000
+Sphase	heterogenize	EGF_INS	None	108000
+Sphase	heterogenize	EGF_INS_MEKi	None	108000
+Sphase	heterogenize	EGF_INS_AKTi	None	108000
+cycling	heterogenize	EGF_only	36.4773	108000
+cycling	heterogenize	INS_only	3.899	108000
+cycling	heterogenize	EGF_INS	49.2645	108000
+cycling	heterogenize	EGF_INS_MEKi	1.55545	108000
+cycling	heterogenize	EGF_INS_AKTi	0.81705	108000
