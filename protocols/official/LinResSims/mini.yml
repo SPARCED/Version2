@@ -30,9 +30,8 @@ protocol:
         origin: 1
         timepoint: "last"
       modifications:
-        species:
-          E: 3.308        # EGF
-          INS: 1721.76    # Insulin
+        E: 3.308        # EGF
+        INS: 1721.76    # Insulin
       simulation_mode: "stochastic"
     - step: 3
       name: "Cell culture (control - dose 0)"
