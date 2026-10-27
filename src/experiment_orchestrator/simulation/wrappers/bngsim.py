@@ -33,7 +33,6 @@ class BNGSimSolver(AbstractSolver):
         )
 
     def modify(self, component: str, value: int | float) -> None:
-        log.debug("Setting %s = %s", component, value)
         try:
             if component in self.tool.param_names:
                 self.tool.set_param(component, float(value))
