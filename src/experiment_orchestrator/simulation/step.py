@@ -69,15 +69,10 @@ class SimulationStep:
         self.status = SimulationStatus.LOADED
         self._log_status()
 
-    def load_modifications(self):
-        # Load input data:
-        # - needs solver from WORKER
-        # - use wrapper to load input data into solver
-
-        # Apply modifications:
-        # - needs solver from WORKER
-        # - use wrapper to apply modifications data on solver
-        pass
+    def load_modifications(self, solver):
+        for k, v in self.infos.modifications.items():
+            log.debug(f"{k} changed to {v}")
+            solver.modify(k, v)
 
     def run(self):
         # Run simulation

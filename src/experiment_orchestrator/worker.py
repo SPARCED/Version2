@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from types import SimpleNamespace
+
 from collections import deque
 from copy import deepcopy
 
@@ -18,9 +20,6 @@ from simulation.step import SimulationStatus
 
 from utils.path_validator import PathValidator
 
-
-# TODO remove this debug
-from types import SimpleNamespace
 
 def worker(comm, rank, size, context):
     t_worker_start = now()
@@ -80,7 +79,7 @@ def worker(comm, rank, size, context):
                 else:
                     simulation.load_initial_conditions(context[ProtocolContextKeys.PROTOCOL_NAME], output_path, cell)
                 # Load modifications
-                simulation.load_modifications()
+                simulation.load_modifications(solver)
                 # Run
                 status = simulation.run()
                 # Apoptosis - Empty queue, as the next protocol steps are not applicable anymore
