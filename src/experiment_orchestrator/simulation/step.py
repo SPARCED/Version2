@@ -74,13 +74,16 @@ class SimulationStep:
             log.debug(f"{k} changed to {v}")
             solver.modify(k, v)
 
-    def run(self):
+    def run(self, solver):
         # Run simulation
         # - needs solver and cell_number + output_path from WORKER
         # - resolve output file name / path
         # - responsible for calls to simulation wrapper
         # - use a step by step method (like every 100 steps for example) to make regular saves
         
+        # THIS IS A TEST
+        solver.simulate(0, self.infos.duration, self.infos.exchange)
+
         # Handle the status
         # - determine simulation status (ALIVE, DEAD, DIVISION)
         # - return it to WORKER
