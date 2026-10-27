@@ -1,6 +1,6 @@
 # LinResSims - Control
 # Replicate control dose-response of the Mutsuddy 2025 paper
-# Last update: 2026-08-11
+# Last update: 2026-10-27
 
 # GLOBAL EXPERIMENTAL SETTINGS
 
@@ -22,8 +22,6 @@ protocol:
       duration: 172800  # 48h
       input:
         origin: 0
-      modifications:
-        compartments: YES #TODO add modifications
       simulation_mode: "stochastic"
     - step: 2
       name: "Incubation"
@@ -32,8 +30,9 @@ protocol:
         origin: 1
         timepoint: "last"
       modifications:
-        # Probably safer to add explicitly compartments?
-        species: YES # TODO: add EGF and insulin
+        species:
+          E: 3.308        # EGF
+          INS: 1721.76    # Insulin
       simulation_mode: "stochastic"
     - step: 3
       name: "Cell culture (control - dose 0)"
@@ -41,7 +40,5 @@ protocol:
       input:
         origin: 2
         timepoint: "random"
-      modifications:
-        # Probably safer to add explicitly compartments?
       simulation_mode: "lineage"
 

@@ -1,6 +1,6 @@
 # LinResSims - Alpelisib
 # Replicate alpelisib dose-response of the Mutsuddy 2025 paper
-# Last update: 2026-08-11
+# Last update: 2026-10-27
 
 # GLOBAL EXPERIMENTAL SETTINGS
 
@@ -17,7 +17,7 @@ solver: "SPARCED"
 
 # PROTOCOL STEPS 
 protocol:
-    - step: 3
+    - step: 1
       name: "Cell culture (dose 1)"
       duration: 259200   # 72h
       input:
@@ -25,10 +25,10 @@ protocol:
         origin: 2
         timepoint: "random"
       modifications:
-        compartments: YES
-        species: drug treatment
+        species:
+          alpel_EC: 0.0
       simulation_mode: "lineage"
-    - step: 4
+    - step: 2
       name: "Cell culture (dose 2)"
       duration: 259200  # 72h
       input:
@@ -36,10 +36,10 @@ protocol:
         origin: 2
         timepoint: "random"
       modifications:
-        compartments: YES
-        species: drug treatment
+        species:
+          alpel_EC: 0.001
       simulation_mode: "lineage"
-    - step: 5
+    - step: 3
       name: "Cell culture (dose 3)"
       duration: 259200  # 72h
       input:
@@ -47,7 +47,7 @@ protocol:
         origin: 2
         timepoint: "random"    
       modifications:
-        compartments: YES/NO
-        species: drug treatment
+        species:
+          alpel_EC: 0.003162
       simulation_mode: "lineage"
 
