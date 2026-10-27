@@ -28,6 +28,7 @@ def validate_step_input(value):
 
     return errors
 
+"""
 def validate_step_modifications(value):
     errors = []
 
@@ -37,6 +38,7 @@ def validate_step_modifications(value):
                 errors.append(ValidationError(key, "unknown modifications key"))
 
     return errors
+"""
 
 def validate_step_simulation_mode(value):
     errors = []
@@ -60,7 +62,7 @@ def validate_step_number(value):
 FIELD_VALIDATORS = {
     ProtocolStepKeys.DURATION: validate_step_duration,
     ProtocolStepKeys.INPUT: validate_step_input,
-    ProtocolStepKeys.MODIFICATIONS: validate_step_modifications,
+    # ProtocolStepKeys.MODIFICATIONS: validate_step_modifications,
     ProtocolStepKeys.NUMBER: validate_step_number,
     ProtocolStepKeys.SIMULATION_MODE: validate_step_simulation_mode
     }
