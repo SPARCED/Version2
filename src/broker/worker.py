@@ -11,14 +11,14 @@ from pathlib import Path
 from config.paths import MODELS_DIR_PATH
 from config.protocol_file_format import ProtocolContextKeys
 
-from runtime.logging import log, log_time
-from runtime.performance import now
+from validators.path import PathValidator
+
+from broker.runtime.logging import log, log_time
+from broker.runtime.performance import now
 
 from simulation._load_solver import load_solver
 from simulation.step import SimulationStep
 from simulation.step import SimulationStatus
-
-from utils.path_validator import PathValidator
 
 
 def worker(comm, rank, size, context):
@@ -87,6 +87,7 @@ def worker(comm, rank, size, context):
                 if status ==  SimulationStatus.APOPTOSIS:
                     protocol_queue.clear()
                 # Mitosis - Add daughter cell ids to list of cell to simulate
+                # In case of lineage tracing, because otherwise the cell simulation just stops I guess?
                 if status == SimulationStatus.MITOSIS:
                     daughter_1 = cell + pow(2, simulation.generation)*nb_cells
                     daughter_2 = cell + pow(2, simulation.generation+1)*nb_cells
