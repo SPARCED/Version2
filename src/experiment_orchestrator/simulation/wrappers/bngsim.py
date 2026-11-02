@@ -5,6 +5,9 @@
 
 import bngsim
 
+import numpy as np
+import pandas as pd
+
 from simulation._abstract_solver import AbstractSolver
 
 from runtime.logging import log
@@ -20,11 +23,11 @@ class BNGSimSolver(AbstractSolver):
         self.tool = bngsim.Model.from_sbml(args.model_paths[0])
 
     def simulate(self, start, stop, step) -> pd.DataFrame:
-        n_points = int(((stop + step) - start) / step)
+        time_points = int((stop + step - start) / step)
         sim = bngsim.Simulator(self.tool, method="ode", codegen=True)
         result = sim.run(
             t_span=(float(start), float(stop + step)),
-            n_points=n_points,
+            n_points=time_points
         )
         result_stack = np.column_stack((result.time, result.species))
         return pd.DataFrame(
