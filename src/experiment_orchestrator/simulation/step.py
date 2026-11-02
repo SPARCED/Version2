@@ -7,6 +7,8 @@ from enum import StrEnum, auto
 from pathlib import Path
 from types import SimpleNamespace
 
+import pandas as pd
+
 from config.protocol_file_format import DefaultStepValues, RESERVED_ORIGIN_VALUE, ProtocolTimepointValues
 
 from runtime.logging import log
@@ -58,7 +60,7 @@ class SimulationStep:
                  self.infos.input["timepoint"] == ProtocolTimepointValues.LAST)):
                     pass
         
-        input_file = output_path / f"{self.infos.input['name']}_{self.infos.input['origin']}_{cell_nb}"
+        input_file = output_path / f"{self.infos.input['name']}_step_{self.infos.input['origin']}_cell_{cell_nb}"
         # Open file
         # Read time point
         # Loop with modification function to load data
@@ -74,7 +76,7 @@ class SimulationStep:
             log.debug(f"{k} changed to {v}")
             solver.modify(k, v)
 
-    def run(self, solver):
+    def run(self, solver, output_path):
         # Run simulation
         # - needs solver and cell_number + output_path from WORKER
         # - resolve output file name / path
@@ -82,7 +84,8 @@ class SimulationStep:
         # - use a step by step method (like every 100 steps for example) to make regular saves
         
         # THIS IS A TEST
-        solver.simulate(0, self.infos.duration, self.infos.exchange)
+        results = solver.simulate(0, self.infos.duration, self.infos.exchange)
+        results.to_csv(output_path, sep="\t", index=True)
 
         # Handle the status
         # - determine simulation status (ALIVE, DEAD, DIVISION)

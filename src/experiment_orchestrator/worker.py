@@ -81,7 +81,8 @@ def worker(comm, rank, size, context):
                 # Load modifications
                 simulation.load_modifications(solver)
                 # Run
-                status = simulation.run(solver)
+                result_path = output_path / f"{context[ProtocolContextKeys.PROTOCOL_NAME]}_step_{simulation.infos.step}_cell_{cell}.tsv"
+                status = simulation.run(solver, result_path)
                 # Apoptosis - Empty queue, as the next protocol steps are not applicable anymore
                 if status ==  SimulationStatus.APOPTOSIS:
                     protocol_queue.clear()
