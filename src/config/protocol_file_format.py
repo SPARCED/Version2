@@ -5,8 +5,10 @@ from enum import StrEnum
 
 # PROTOCOL FILE FORMAT CONVENTIONS
 
+# GENERAL SETTINGS
+
 # File format extension
-EXTENSION = ".yml"
+FILE_EXTENSION = ".yml"
 
 # Context keys
 class ProtocolContextKeys(StrEnum):
