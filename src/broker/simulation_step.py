@@ -25,7 +25,7 @@ class SimulationStatus(StrEnum):
 
 class SimulationStep:
 
-    def __init__(self, details, protocol_name, generation):
+    def __init__(self, details, protocol_name, generation=0):
         self.infos = SimpleNamespace(**(DefaultStepValues | details))
         self.generation = generation
         # Set default values to all input fields & evaluate input type
@@ -42,7 +42,7 @@ class SimulationStep:
         return all(self.infos.input[k] == tested[k] for k in tested)
 
     def _log_status(self):
-        log.debug("Step %d (%s) is %s.", self.infos.step, self.infos.name, self.status)
+        log.debug(f"Step {self.infos.step} ({self.infos.name}) is {self.status}.")
 
     def _set_input_fields(self, origin, previous):
         if self.infos.input is not None:

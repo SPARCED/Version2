@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from pathlib import Path
+from typing import Any
 
 from config.paths import MODELS_DIR_PATH
 from config.protocol_file_format import ProtocolContextKeys
@@ -11,17 +12,32 @@ from broker.runtime.performance import now
 
 from validators.path import PathValidator
 
+from broker.simulation_step import SimulationStep
+
 from solvers.loader import load_solver_cls
 
-"""
+# TODO: try to use a dictionnary instead
 from types import SimpleNamespace
 
+"""
 from collections import deque
 from copy import deepcopy
 
-from simulation.step import SimulationStep
 from simulation.step import SimulationStatus
 """
+
+def compute_assigned_cell_ids(nb_cells: int, worker_rank: int, size: int):
+    nb_workers = size - 1   # Discard broker
+    return [cell for cell in range(worker_rank, nb_cells+1, nb_workers)]
+
+def load_protocol(context: dict[str, Any]):
+    protocol = []
+
+    for s in context[ProtocolContextKeys.PROTOCOL_DETAILS]:
+        step = SimulationStep(s, context[ProtocolContextKeys.PROTOCOL_NAME])
+        protocol.append(step)
+
+    return protocol
 
 def worker(comm, rank, size, context):
     t_worker_start = now()
@@ -32,13 +48,6 @@ def worker(comm, rank, size, context):
     output_path = PathValidator.directory(model_path / Path(context[ProtocolContextKeys.OUTPUT_FOLDER].lstrip("/\\")))
     sbml_paths = [PathValidator.file(model_path / sbml_file.lstrip("/\\")) for sbml_file in context[ProtocolContextKeys.SBML_FILES]]
 
-    # Deduce from rank assigned list of cells
-    nb_cells = context[ProtocolContextKeys.NB_CELLS]
-    nb_workers = size - 1
-
-    cell_ids = [c for c in range(rank, nb_cells+1, nb_workers)]
-    log.debug(f"Worker got assigned the following cells: {cell_ids}")
-
     # Setup solver
     try:
         SolverClass = load_solver_cls(context[ProtocolContextKeys.SOLVER])
@@ -46,30 +55,30 @@ def worker(comm, rank, size, context):
         log.critical(e)
         comm.Abort(1)       # This kills the whole computation, including other ranks.
                             # Reading documentation about "ULFM" (User-Level Failure Mitigation) could be interesting.
-
     args = SimpleNamespace(model_paths=sbml_paths)
-    solver = solver_class(args)
-    # Load SBML
-    # WARNING: by default, the wrappers consider the first file as deterministic and the second as stochastic.
-    # This implicit behavior should either be corrected or documented.
+    solver = SolverClass(args)
+
+    # Load SBML file(s) within solver
+    # TODO: By default, the wrappers consider the first file as deterministic, and the second as stochastic.
+    #       This implicit behavior should either be corrected, or documented.
     solver.load(args)
-    # Could still be nice to store initial state if possible
 
     # Build protocol (create original FIFO)
-    protocol = []
+    protocol = load_protocol(context)
+    
+    # Deduce from rank assigned list of cells
+    cell_ids = compute_assigned_cell_ids(context[ProtocolContextKeys.NB_CELLS], rank, size)
+    log.debug(f"Worker got assigned the following cells: {cell_ids}.")
 
-    for s in context[ProtocolContextKeys.PROTOCOL]:
-        step = SimulationStep(s, context[ProtocolContextKeys.PROTOCOL_NAME], 0)
-        protocol.append(step)
-        log.debug("Worker loaded step: %s", s)
 
+    
     lineage_tracing = {}
 
     # Perform protocol on each cell
     for cell in cell_ids:
-        log.debug("Worker takes cell: %d", cell)
+        log.debug(f"Worker takes cell: {cell}")
         
-        if cell > nb_cells:
+        if cell > context[ProtocolContextKeys.NB_CELLS]:
             log.debug("Lineage tracing is not implemented yet.")
             continue
 
