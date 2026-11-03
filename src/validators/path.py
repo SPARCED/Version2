@@ -26,7 +26,7 @@ class PathValidator:
             raise FileNotFoundError(f"{path}")
 
         if suffix is not None and p.suffix.lower() != suffix.lower():
-            raise ValueError(f"Expected a {suffix} file: {path}")
+            raise ValueError(f"Expected a {suffix} file ; got: {path}")
 
         return p
 
