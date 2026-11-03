@@ -8,7 +8,7 @@ import bngsim
 import numpy as np
 import pandas as pd
 
-from simulation._abstract_solver import AbstractSolver
+from solvers._abstract_solver import AbstractSolver
 
 
 class BNGSimSolver(AbstractSolver):
@@ -43,3 +43,4 @@ class BNGSimSolver(AbstractSolver):
                 raise ValueError(f"Component '{component}' not found in model")
         except ValueError as e:
             raise ValueError(f"Error setting {component}: {e}") from e
+
