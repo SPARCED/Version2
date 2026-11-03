@@ -17,7 +17,7 @@ class PathValidator:
         return p
 
     @staticmethod
-    def file(path: str | Path, suffix: str | None = None) -> Path:
+    def file(path: str | Path, expected_suffix: str | None = None) -> Path:
         p = Path(path).resolve()
 
         if not p.exists():
@@ -25,8 +25,8 @@ class PathValidator:
         if not p.is_file():
             raise FileNotFoundError(f"{path}")
 
-        if suffix is not None and p.suffix.lower() != suffix.lower():
-            raise ValueError(f"Expected a {suffix} file ; got: {path}")
+        if expected_suffix is not None and p.suffix.lower() != expected_suffix.lower():
+            raise ValueError(f"Expected a {expected_suffix} file ; got: {path}")
 
         return p
 
