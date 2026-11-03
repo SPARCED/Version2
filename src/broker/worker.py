@@ -1,25 +1,26 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from types import SimpleNamespace
-
-from collections import deque
-from copy import deepcopy
-
 from pathlib import Path
 
 from config.paths import MODELS_DIR_PATH
 from config.protocol_file_format import ProtocolContextKeys
 
-from validators.path import PathValidator
-
 from broker.runtime.logging import log, log_time
 from broker.runtime.performance import now
+
+from validators.path import PathValidator
+
+"""
+from types import SimpleNamespace
+
+from collections import deque
+from copy import deepcopy
 
 from simulation._load_solver import load_solver
 from simulation.step import SimulationStep
 from simulation.step import SimulationStatus
-
+"""
 
 def worker(comm, rank, size, context):
     t_worker_start = now()
@@ -27,15 +28,15 @@ def worker(comm, rank, size, context):
 
     # Reconstruct paths
     model_path = PathValidator.directory(MODELS_DIR_PATH / Path(context[ProtocolContextKeys.MODEL_FOLDER].lstrip("\//")))
-    output_path = PathValidator.directory(model_path / Path(context[ProtocolContextKeys.OUTPUT].lstrip("\//")))
-    sbml_paths = [model_path / sbml_name.lstrip("\//") for sbml_name in context[ProtocolContextKeys.SBML]]
-    
+    output_path = PathValidator.directory(model_path / Path(context[ProtocolContextKeys.OUTPUT_FOLDER].lstrip("\//")))
+    sbml_paths = [PathValidator.file(model_path / sbml_file.lstrip("\//")) for sbml_file in context[ProtocolContextKeys.SBML_FILES]]
+
     # Deduce from rank assigned list of cells
     nb_cells = context[ProtocolContextKeys.NB_CELLS]
     nb_workers = size - 1
 
     cell_ids = [c for c in range(rank, nb_cells+1, nb_workers)]
-    log.debug("Worker got assigned the following cells: %s", cell_ids)
+    log.debug(f"Worker got assigned the following cells: {cell_ids}")
 
     # Setup solver
     solver_class = load_solver(context[ProtocolContextKeys.SOLVER])
