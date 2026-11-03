@@ -4,6 +4,9 @@
 from pathlib import Path
 from typing import Any
 
+from collections import deque
+from copy import deepcopy
+
 from config.paths import MODELS_DIR_PATH
 from config.protocol_file_format import ProtocolContextKeys
 
@@ -12,6 +15,7 @@ from broker.runtime.performance import now
 
 from validators.path import PathValidator
 
+from broker.simulation_step import SimulationStatus
 from broker.simulation_step import SimulationStep
 
 from solvers.loader import load_solver_cls
@@ -19,13 +23,8 @@ from solvers.loader import load_solver_cls
 # TODO: try to use a dictionnary instead
 from types import SimpleNamespace
 
-"""
-from collections import deque
-from copy import deepcopy
 
-from simulation.step import SimulationStatus
-"""
-
+# UTILITIES -- MIGHT MOVE INTO ANOTHER SCRIPT LATER
 def compute_assigned_cell_ids(nb_cells: int, worker_rank: int, size: int):
     nb_workers = size - 1   # Discard broker
     return [cell for cell in range(worker_rank, nb_cells+1, nb_workers)]
@@ -39,9 +38,10 @@ def load_protocol(context: dict[str, Any]):
 
     return protocol
 
+# WORKER -- MAIN FUNCTION
 def worker(comm, rank, size, context):
     t_worker_start = now()
-    log.info("Worker started with context: %r", context)
+    log.info(f"Worker started with context: {context}")
 
     # Reconstruct paths
     model_path = PathValidator.directory(MODELS_DIR_PATH / Path(context[ProtocolContextKeys.MODEL_FOLDER].lstrip("/\\")))
@@ -70,15 +70,14 @@ def worker(comm, rank, size, context):
     cell_ids = compute_assigned_cell_ids(context[ProtocolContextKeys.NB_CELLS], rank, size)
     log.debug(f"Worker got assigned the following cells: {cell_ids}.")
 
-
-    
+    # Perform protocol on each cell
+    nb_cells = context[ProtocolContextKeys.NB_CELLS]
     lineage_tracing = {}
 
-    # Perform protocol on each cell
     for cell in cell_ids:
         log.debug(f"Worker takes cell: {cell}")
         
-        if cell > context[ProtocolContextKeys.NB_CELLS]:
+        if cell > nb_cells:
             log.debug("Lineage tracing is not implemented yet.")
             continue
 
