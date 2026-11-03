@@ -11,13 +11,14 @@ from broker.runtime.performance import now
 
 from validators.path import PathValidator
 
+from solvers.loader import load_solver_cls
+
 """
 from types import SimpleNamespace
 
 from collections import deque
 from copy import deepcopy
 
-from simulation._load_solver import load_solver
 from simulation.step import SimulationStep
 from simulation.step import SimulationStatus
 """
@@ -27,9 +28,9 @@ def worker(comm, rank, size, context):
     log.info("Worker started with context: %r", context)
 
     # Reconstruct paths
-    model_path = PathValidator.directory(MODELS_DIR_PATH / Path(context[ProtocolContextKeys.MODEL_FOLDER].lstrip("\//")))
-    output_path = PathValidator.directory(model_path / Path(context[ProtocolContextKeys.OUTPUT_FOLDER].lstrip("\//")))
-    sbml_paths = [PathValidator.file(model_path / sbml_file.lstrip("\//")) for sbml_file in context[ProtocolContextKeys.SBML_FILES]]
+    model_path = PathValidator.directory(MODELS_DIR_PATH / Path(context[ProtocolContextKeys.MODEL_FOLDER].lstrip("/\\")))
+    output_path = PathValidator.directory(model_path / Path(context[ProtocolContextKeys.OUTPUT_FOLDER].lstrip("/\\")))
+    sbml_paths = [PathValidator.file(model_path / sbml_file.lstrip("/\\")) for sbml_file in context[ProtocolContextKeys.SBML_FILES]]
 
     # Deduce from rank assigned list of cells
     nb_cells = context[ProtocolContextKeys.NB_CELLS]
@@ -39,7 +40,13 @@ def worker(comm, rank, size, context):
     log.debug(f"Worker got assigned the following cells: {cell_ids}")
 
     # Setup solver
-    solver_class = load_solver(context[ProtocolContextKeys.SOLVER])
+    try:
+        SolverClass = load_solver_cls(context[ProtocolContextKeys.SOLVER])
+    except Exception as e:  # Most likely raised by an error when loading the solver
+        log.critical(e)
+        comm.Abort(1)       # This kills the whole computation, including other ranks.
+                            # Reading documentation about "ULFM" (User-Level Failure Mitigation) could be interesting.
+
     args = SimpleNamespace(model_paths=sbml_paths)
     solver = solver_class(args)
     # Load SBML
