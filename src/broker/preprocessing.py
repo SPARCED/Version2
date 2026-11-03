@@ -9,9 +9,8 @@ from validators.protocol import ProtocolValidator
 
 
 def load_protocol(protocol_relative_path: str | Path):
-    # Reconstruct protocol path
-    protocol_path = PROTOCOLS_DIR_PATH / Path(protocol_relative_path.lstrip("/\\"))    
-    
+    protocol_path = PROTOCOLS_DIR_PATH / Path(protocol_relative_path.lstrip("/\\"))
+
     protocol = ProtocolValidator.load_valid(protocol_path)
 
     return protocol
