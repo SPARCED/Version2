@@ -10,8 +10,6 @@ import pandas as pd
 
 from simulation._abstract_solver import AbstractSolver
 
-from runtime.logging import log
-
 
 class BNGSimSolver(AbstractSolver):
     """Load SBML via BNGSim; integrate with codegen ODE solver."""
