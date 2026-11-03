@@ -4,6 +4,6 @@
 # AVAILABLE SOLVERS
 
 SOLVERS_REGISTRY = {
-        "bngsim": "simulation.wrappers.bngsim.BNGSimSolver"
+        "bngsim": "solvers.wrappers.bngsim.BNGSimSolver"
         }
 
