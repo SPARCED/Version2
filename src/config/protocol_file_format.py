@@ -10,26 +10,31 @@ from enum import StrEnum
 # File format extension
 FILE_EXTENSION = ".yml"
 
-# Context keys
+# CONTEXT
+
+# Keys
 class ProtocolContextKeys(StrEnum):
     # Paths, files, directories
     MODEL_FOLDER = "model"
-    OUTPUT = "output_directory"
+    OUTPUT_FOLDER = "output_directory"
     PROTOCOL_NAME = "name"
-    SBML = "sbml"
+    SBML_FILES = "sbml"
     # Experimental settings
     NB_CELLS = "nb_cells"
     SOLVER = "solver"
     # Protocol
-    PROTOCOL = "protocol"
+    PROTOCOL_DETAILS = "protocol"
 
+# TODO: redefine what is required or not
 PROTOCOL_REQUIRED_KEYS = {
-        ProtocolContextKeys.OUTPUT,
+        ProtocolContextKeys.OUTPUT_FOLDER,
         ProtocolContextKeys.PROTOCOL_NAME,
-        ProtocolContextKeys.SBML,
+        ProtocolContextKeys.SBML_FILES,
         ProtocolContextKeys.NB_CELLS,
         ProtocolContextKeys.SOLVER
         }
+
+# ----------
 
 # Context values
 # TODO: replace with SIMULATOR_REGISTRY
