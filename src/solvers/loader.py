@@ -10,10 +10,11 @@ import importlib
 from config.solvers import SOLVERS_REGISTRY
 
 
-def load_solver(name: str):
+def load_solver_cls(name: str):
     """Import and return a simulator class by registry name."""
     if name not in SOLVERS_REGISTRY:
         raise KeyError(name)
+    
     import_path = SOLVERS_REGISTRY[name]
     module_path, class_name = import_path.rsplit(".", 1)
 
