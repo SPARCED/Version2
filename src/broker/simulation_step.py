@@ -1,36 +1,30 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import random # TODO this is for debugging ; to remove
-
-from enum import StrEnum, auto
 from pathlib import Path
 from types import SimpleNamespace
 
 import pandas as pd
+import random   # TODO: remove ; this is for debugging purpose
 
 from config.protocol_file_format import DefaultStepValues, RESERVED_ORIGIN_VALUE, ProtocolTimepointValues
 
 from broker.runtime.logging import log
 
+from broker.simulation_status import SimulationStatus
 
-class SimulationStatus(StrEnum):
-    INITIAL = auto()
-    LOADED = auto()
-    MODIFIED = auto()
-    RUNNING = auto()
-    APOPTOSIS = auto()
-    FINISHED = auto()
-    MITOSIS = auto()
+from solvers._abstract_solver import AbstractSolver
+
 
 class SimulationStep:
 
     def __init__(self, details, protocol_name, generation=0):
-        self.infos = SimpleNamespace(**(DefaultStepValues | details))
+        self.details = SimpleNamespace(**(DefaultStepValues | details))
         self.generation = generation
+        self.protocol_name = protocol_name
         # Set default values to all input fields & evaluate input type
         origin = {"name": protocol_name, "origin": RESERVED_ORIGIN_VALUE, "timepoint": ProtocolTimepointValues.FIRST }
-        previous = {"name": protocol_name, "origin": self.infos.step-1, "timepoint": ProtocolTimepointValues.LAST }
+        previous = {"name": protocol_name, "origin": self.details.step-1, "timepoint": ProtocolTimepointValues.LAST }
         self._set_input_fields(origin, previous)
         self.is_from_origin = self._input_is_from(origin)
         self.is_from_previous = self._input_is_from(previous)
@@ -39,23 +33,24 @@ class SimulationStep:
         self._log_status()
 
     def _input_is_from(self, tested):
-        return all(self.infos.input[k] == tested[k] for k in tested)
+        return all(self.details.input[k] == tested[k] for k in tested)
 
     def _log_status(self):
-        log.debug(f"Step {self.infos.step} ({self.infos.name}) is {self.status}.")
+        log.debug(f"Step {self.details.step} ({self.details.name}) is {self.status}.")
 
     def _set_input_fields(self, origin, previous):
-        if self.infos.input is not None:
+        if self.details.input is not None:
             for k, v in previous.items():
-                self.infos.input.setdefault(k, v)
+                self.details.input.setdefault(k, v)
         else:
             for k, v in origin.items():
-                self.infos.input.setdefault(k, v)
+                self.details.input.setdefault(k, v)
 
-    def load_initial_conditions(self, protocol_name, output_path, cell_nb):
+    """
+    def load_initial_conditions(self, output_path, cell_nb):
         # Don't reload previous step
         if self.infos.step is not None and all(
-                (self.infos.input["name"] == protocol_name,
+                (self.infos.input["name"] == self.protocol_name,
                  self.infos.input["origin"] == self.infos.step - 1,
                  self.infos.input["timepoint"] == ProtocolTimepointValues.LAST)):
                     pass
@@ -70,31 +65,40 @@ class SimulationStep:
         
         self.status = SimulationStatus.LOADED
         self._log_status()
+    """
 
-    def load_modifications(self, solver):
-        for k, v in self.infos.modifications.items():
-            log.debug(f"{k} changed to {v}")
-            solver.modify(k, v)
+    def apply_modifications(self, solver: AbstractSolver) -> None:
+        for k, v in self.details.modifications.items():
+            try:
+                solver.modify(k, v)
+            except ValueError as e:
+                log.error(e)    # Termination is upon the user
 
-    def run(self, solver, output_path):
-        # Get output file path to store results
-        # Run a simulation
-        results = solver.simulate(0, self.infos.duration, self.infos.exchange)
-        # TODO: use a step by step method (like every 100 steps for example) to make regular saves
-        # Save simulation
-        results.to_csv(output_path, sep="\t", index=True)   # Index is time, which could be useful?
-        # Determine simulation status
-
-
-        # Handle the status
-        # - determine simulation status (ALIVE, DEAD, DIVISION)
-        # - return it to WORKER
-        if self.generation > 2:
-            return SimulationStatus.APOPTOSIS
-        return random.choice([SimulationStatus.APOPTOSIS, SimulationStatus.FINISHED, SimulationStatus.MITOSIS])
+        self.status = SimulationStatus.MODIFIED
+        self._log_status()
 
     def reset(self):
         # Revert here any changes made to the object
         self.status = SimulationStatus.INITIAL
+        self._log_status()
+
+    def run(self, cell_id: int, solver: AbstractSolver, output_path: str | Path) -> SimulationStatus:
+        self.status = SimulationStatus.RUNNING
+        self._log_status()
+
+        # Reconstruct output file path to store results
+        results_name = f"{self.protocol_name}_step_{self.details.step}_cell_{cell_id}.tsv"
+        results_path = output_path / results_name
+
+        # Run a simulation
+        results = solver.simulate(0, self.details.duration, self.details.exchange)
+        
+        # Save results
+        results.to_csv(results_path, sep="\t", index=True)
+        # TODO: perform regular saves, for example every 100 steps
+
+        # Detect status
+        self.status = SimulationStatus.FINISHED # random.choice([SimulationStatus.APOPTOSIS, SimulationStatus.FINISHED, SimulationStatus.MITOSIS])
+        # TODO: read results through time and search for events
         self._log_status()
 
