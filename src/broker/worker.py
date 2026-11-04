@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from pathlib import Path
-from typing import Any
 
 from collections import deque
 from copy import deepcopy
@@ -18,27 +17,15 @@ from validators.path import PathValidator
 from broker.simulation_step import SimulationStatus
 from broker.simulation_step import SimulationStep
 
+from broker.utils.protocol import load_protocol
+from broker.utils.worker import compute_assigned_cell_ids
+
 from solvers.loader import load_solver_cls
 
-# TODO: try to use a dictionnary instead
+# TODO remove ?
 from types import SimpleNamespace
 
 
-# UTILITIES -- MIGHT MOVE INTO ANOTHER SCRIPT LATER
-def compute_assigned_cell_ids(nb_cells: int, worker_rank: int, size: int):
-    nb_workers = size - 1   # Discard broker
-    return [cell for cell in range(worker_rank, nb_cells+1, nb_workers)]
-
-def load_protocol(context: dict[str, Any]):
-    protocol = []
-
-    for s in context[ProtocolContextKeys.PROTOCOL_DETAILS]:
-        step = SimulationStep(s, context[ProtocolContextKeys.PROTOCOL_NAME])
-        protocol.append(step)
-
-    return protocol
-
-# WORKER -- MAIN FUNCTION
 def worker(comm, rank, size, context):
     t_worker_start = now()
     log.info(f"Worker started with context: {context}")
