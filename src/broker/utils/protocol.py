@@ -7,6 +7,8 @@ from typing import Any
 
 from config.protocol_file_format import ProtocolContextKeys
 
+from broker.runtime.logging import log
+
 from broker.simulation_status import SimulationStatus
 from broker.simulation_step import SimulationStep
 
@@ -22,13 +24,18 @@ def load_protocol(context: dict[str, Any]) -> list[SimulationStep]:
 
     return protocol
 
-def run_protocol(protocol: list[SimulationStep], cell_id: int, solver: AbstractSolver, output_path: str | Path):
+def run_protocol(protocol: list[SimulationStep], cell_id: int, solver: AbstractSolver, output_path: str | Path, args):
     protocol_queue = deque(protocol)    # WARNING: Shallow copy, always reset the objects afterwards
 
     while protocol_queue:
         simulation = protocol_queue.popleft()
 
         try:
+            # Load protocol
+            if simulation.is_from_origin:
+                solver.load(args)
+            else:
+                log.critical("Loading not implemented yet.")
             # Apply modifications
             simulation.apply_modifications(solver)
             # Run
