@@ -41,8 +41,8 @@ def style_ticks(ax, axis="both"):
             label.set_fontweight("bold")
 
 # (1) Plot single stranded break results
-single_without_repair = pd.read_csv("DNA_repair_step_1_cell_1.tsv", sep="\t", index_col=0)
-single_with_repair =    pd.read_csv("DNA_repair_step_2_cell_1.tsv", sep="\t", index_col=0)
+single_without_repair = pd.read_csv("DNA_repair_step_1_cell_1.tsv", sep="\t", index_col=1)
+single_with_repair =    pd.read_csv("DNA_repair_step_2_cell_1.tsv", sep="\t", index_col=1)
 
 axs[0].plot(single_without_repair.index / 3600,
             single_without_repair["nuc_prot_a__P53_"],
@@ -55,12 +55,12 @@ axs[0].grid(True)
 axs[0].set_ylim(0, 400)
 axs[0].set_xticks(np.arange(0, 24, step=6))
 axs[0].legend(frameon=False)
-axs[0].text(0.50, 350.0, 'Single Stranded DNA damage', fontsize=12)
+axs[0].text(12.50, 350.0, 'Single Stranded DNA damage', fontsize=12)
 style_ticks(axs[0])
 
 # (2) Plot double stranded break results
-double_without_repair = pd.read_csv("DNA_repair_step_3_cell_1.tsv", sep="\t", index_col=0)
-double_with_repair =    pd.read_csv("DNA_repair_step_4_cell_1.tsv", sep="\t", index_col=0)
+double_without_repair = pd.read_csv("DNA_repair_step_3_cell_1.tsv", sep="\t", index_col=1)
+double_with_repair =    pd.read_csv("DNA_repair_step_4_cell_1.tsv", sep="\t", index_col=1)
 
 axs[1].plot(double_without_repair.index / 3600,
             double_without_repair["nuc_prot_a__P53_"],
@@ -72,12 +72,12 @@ axs[1].plot(double_with_repair.index / 3600,
 axs[1].grid(True)
 axs[1].set_xticks(np.arange(0, 24, step=6))
 axs[1].set_ylim(0, 1000)
-axs[1].text(0.50, 850.0, 'Double Stranded DNA damage', fontsize=12)
+axs[1].text(12.50, 900.0, 'Double Stranded DNA damage', fontsize=12)
 style_ticks(axs[1])
 
 # (3) Single and double stranded breaks results
-single_and_double_without_repair = pd.read_csv("DNA_repair_step_5_cell_1.tsv", sep="\t", index_col=0)
-single_and_double_with_repair =    pd.read_csv("DNA_repair_step_6_cell_1.tsv", sep="\t", index_col=0)
+single_and_double_without_repair = pd.read_csv("DNA_repair_step_5_cell_1.tsv", sep="\t", index_col=1)
+single_and_double_with_repair =    pd.read_csv("DNA_repair_step_6_cell_1.tsv", sep="\t", index_col=1)
 
 axs[2].plot(single_and_double_without_repair.index / 3600,
             single_and_double_without_repair["nuc_prot_a__P53_"],
@@ -88,7 +88,7 @@ axs[2].plot(single_and_double_with_repair.index / 3600,
 
 axs[2].grid(True)
 axs[2].set_ylim(0, 1200)
-axs[2].text(0.50, 900.0, 'DS + SS DNA damage', fontsize=12)
+axs[2].text(15.0, 900.0, 'DS + SS DNA damage', fontsize=12)
 axs[2].set_xlabel('Time (hrs)', weight='bold', fontsize=20)
 style_ticks(axs[2], axis="both")
 
