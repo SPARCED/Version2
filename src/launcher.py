@@ -4,5 +4,5 @@
 from broker.run import run_experiment
 
 if __name__ == "__main__":
-    run_experiment("official/LinResSims/mini.yml", "DEBUG")
+    run_experiment("official/benchmarks/DNA_repair.yml", "DEBUG")
 

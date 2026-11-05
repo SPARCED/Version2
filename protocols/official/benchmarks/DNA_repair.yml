@@ -1,0 +1,73 @@
+# BENCHMARKS - DNA Repair
+# Last update: 2026-11-05
+
+# GLOBAL EXPERIMENTAL SETTINGS
+
+# Paths, files, directories
+name: "DNA_repair"
+model: "/official/stochastic-gene-expression-v1.4.2"
+output_directory: "/results/benchmarks/DNA_repair"
+sbml:
+  - "stochastic_gene_expression_v1_4_2.xml"
+
+# Experimental settings
+nb_cells: 1
+solver: "bngsim"
+
+# PROTOCOL STEPS 
+protocol:
+  - step: 1
+    name: "single strand break with parameters set to 0"
+    duration: 86400 # 24 hours
+    modifications:
+      kD63_1: 0
+      kD64_1: 0
+      kD65_1: 0
+      nuc_abs__DNADoubleStrandBreak_: 0
+      nuc_abs__DNASingleStrandBreak_: 25
+  - step: 2
+    name: "single strand break with parameters multiplied by 15 percent"
+    duration: 86400 # 24 hours
+    modifications:
+      kD63_1: 0.0000075
+      kD64_1: 0.0000015
+      kD65_1: 0.0000015
+      nuc_abs__DNADoubleStrandBreak_: 0
+      nuc_abs__DNASingleStrandBreak_: 25
+  - step: 3
+    name: "double strand break with parameters set to 0"
+    duration: 86400 # 24 hours
+    modifications:
+      kD63_1: 0
+      kD64_1: 0
+      kD65_1: 0
+      nuc_abs__DNADoubleStrandBreak_: 25
+      nuc_abs__DNASingleStrandBreak_: 0
+  - step: 4
+    name: "double strand break with parameters multiplied by 5"
+    duration: 86400 # 24 hours
+    modifications:
+      kD63_1: 0.00025
+      kD64_1: 0.00005
+      kD65_1: 0.00005
+      nuc_abs__DNADoubleStrandBreak_: 25
+      nuc_abs__DNASingleStrandBreak_: 0
+  - step: 5
+    name: "single and double strand breaks with parameters set to 0"
+    duration: 86400 # 24 hours
+    modifications:
+      kD63_1: 0
+      kD64_1: 0
+      kD65_1: 0
+      nuc_abs__DNADoubleStrandBreak_: 25
+      nuc_abs__DNASingleStrandBreak_: 25
+  - step: 6
+    name: "single and double strand breaks with parameters multiplied by 5"
+    duration: 86400 # 24 hours
+    modifications:
+      kD63_1: 0.00025
+      kD64_1: 0.00005
+      kD65_1: 0.00005
+      nuc_abs__DNADoubleStrandBreak_: 25
+      nuc_abs__DNASingleStrandBreak_: 25
+
