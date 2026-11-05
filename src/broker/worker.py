@@ -61,7 +61,7 @@ def worker(comm, rank, size, context):
             continue
             # TODO: extract protocol from lineage_tracing dictionnary
         
-        run_protocol(protocol, cell, solver, output_path)
+        run_protocol(protocol, cell, solver, output_path, args)
     
     t_worker_stop = now() - t_worker_start
     log_time("worker: %f", t_worker_stop)
