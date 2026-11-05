@@ -34,18 +34,18 @@ plt.rcParams.update({
 plt.figure(figsize=(7, 4))
 
 # Load results
-TRAIL_only =  pd.read_csv("Survival_Signaling_step_1_cell_1.tsv", sep="\t", index_col=0)
-TRAIL_ERK_AKT = pd.read_csv("Survival_Signaling_step_2_cell_1.tsv", sep="\t", index_col=0)
-TRAIL_PUMA_NOXA = pd.read_csv("Survival_Signaling_step_3_cell_1.tsv", sep="\t", index_col=0)
+TRAIL_only =  pd.read_csv("Survival_Signaling_step_1_cell_1.tsv", sep="\t", index_col=1)
+TRAIL_ERK_AKT = pd.read_csv("Survival_Signaling_step_2_cell_1.tsv", sep="\t", index_col=1)
+TRAIL_PUMA_NOXA = pd.read_csv("Survival_Signaling_step_3_cell_1.tsv", sep="\t", index_col=1)
 
 # Plot
-plt.plot(TRAIL_only.index / 125, 
+plt.plot(TRAIL_only.index / 3600, 
          TRAIL_only['cyt_prot__cl_PARP1_1_'],
          label='TRAIL only', linewidth=4, color='black')
-plt.plot(TRAIL_ERK_AKT.index / 125, 
+plt.plot(TRAIL_ERK_AKT.index / 3600, 
          TRAIL_ERK_AKT['cyt_prot__cl_PARP1_1_'],
          label='+ppERK/+ppAKT', linewidth=4, color='blue')
-plt.plot(TRAIL_PUMA_NOXA.index / 125, 
+plt.plot(TRAIL_PUMA_NOXA.index / 3600, 
          TRAIL_PUMA_NOXA['cyt_prot__cl_PARP1_1_'],
          label='+PUMA/+NOXA', linewidth=4, color='red')
 
