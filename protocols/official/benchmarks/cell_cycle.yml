@@ -18,7 +18,7 @@ solver: "bngsim"
 protocol:
   - step: 1
     name: "Cyclin D 1.0"
-    duration: 360000 # 100 hours
+    duration: 345600 # 96 hours
     modifications:
       cyt_mrna__CCND1_201_: 0.001897488
       cyt_mrna__CCND2_201_: 0.000316248
@@ -34,7 +34,7 @@ protocol:
       kTCd12_1: 0.0
   - step: 2
     name: "Cyclin D 10.0"
-    duration: 360000 # 100 hours
+    duration: 345600 # 96 hours
     modifications:
       cyt_mrna__CCND1_201_: 0.01897488
       cyt_mrna__CCND2_201_: 0.00316248
@@ -50,7 +50,7 @@ protocol:
       kTCd12_1: 0.0
   - step: 3
     name: "Cyclin D 60.0"
-    duration: 360000 # 100 hours
+    duration: 345600 # 96 hours
     modifications:
       cyt_mrna__CCND1_201_: 0.11384928
       cyt_mrna__CCND2_201_: 0.01897488
