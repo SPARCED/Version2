@@ -1,0 +1,52 @@
+# BENCHMARKS - Survival Signaling
+# Last update: 2026-11-05
+
+# GLOBAL EXPERIMENTAL SETTINGS
+
+# Paths, files, directories
+name: "Survival_Signaling"
+model: "/official/stochastic-gene-expression-v1.4.2"
+output_directory: "/results/benchmarks/survival_signaling"
+sbml:
+  - "stochastic_gene_expression_v1_4_2.xml"
+
+# Experimental settings
+nb_cells: 1
+solver: "bngsim"
+
+# PROTOCOL STEPS 
+protocol:
+  - step: 1
+    name: "Low TRAIL Dose"
+    duration: 360000 # 100 hours
+    modifications:
+      kP33_1: 0.001
+      kP36_1: 0.001
+      kP114_1: 0.05
+      kP118_1: 0.05
+      exc_prot__TNF10_1_: 0.005
+      cyt_mrna__BBC3_203_: 0.000316
+      cyt_mrna__PMAIP1_202_: 0.00126
+  - step: 2
+    name: "Upregulated ERK and ppAKT"
+    duration: 360000 # 100 hours
+    modifications:
+      kP33_1: 0.01
+      kP36_1: 0.01
+      kP114_1: 0.5
+      kP118_1: 0.5
+      exc_prot__TNF10_1_: 0.005
+      cyt_mrna__BBC3_203_: 0.000316
+      cyt_mrna__PMAIP1_202_: 0.00126
+  - step: 3
+    name: "PUMA and NOXA upregulated"
+    duration: 360000 # 100 hours
+    modifications:
+      kP33_1: 0.001
+      kP36_1: 0.001
+      kP114_1: 0.05
+      kP118_1: 0.05
+      exc_prot__TNF10_1_: 0.005
+      cyt_mrna__BBC3_203_: 0.00632
+      cyt_mrna__PMAIP1_202_: 0.0252
+
