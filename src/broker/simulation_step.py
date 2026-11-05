@@ -39,11 +39,11 @@ class SimulationStep:
         log.debug(f"Step {self.details.step} ({self.details.name}) is {self.status}.")
 
     def _set_input_fields(self, origin, previous):
-        if self.details.input is not None:
-            for k, v in previous.items():
+        if not self.details.input:
+            for k, v in origin.items():
                 self.details.input.setdefault(k, v)
         else:
-            for k, v in origin.items():
+            for k, v in previous.items():
                 self.details.input.setdefault(k, v)
 
     """
