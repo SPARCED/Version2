@@ -32,7 +32,9 @@ def run_protocol(protocol: list[SimulationStep], cell_id: int, solver: AbstractS
 
         try:
             # Load protocol
-            if simulation.is_from_origin:
+            if simulation.is_from_previous:
+                pass    # Don't reload
+            elif simulation.is_from_origin:
                 solver.load(args)
             else:
                 log.critical("Loading not implemented yet.")
