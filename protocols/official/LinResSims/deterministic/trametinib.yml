@@ -1,0 +1,33 @@
+# LINRESSIMS (deterministic) - TRAMETINIB
+# Last update: 2026-11-11
+
+# GLOBAL EXPERIMENTAL SETTINGS
+
+# Paths, files, directories
+name: "trametinib"
+model: "/official/2025/"
+output_directory: "/results/LinResSims/deterministic/"
+sbml:
+  - "sparced_2025_linressims_.xml"
+
+# Experimental settings
+nb_cells: 1
+solver: "bngsim"
+
+# PROTOCOL STEPS 
+protocol:
+  - step: 1
+    name: "Serum-starved incubation"
+    duration: 1800    # 30 minutes
+    modifications:
+      trame_EC: 1000  # 1 µM extracellular trametinib
+  - step: 2
+    name: "Addition of growth factors"
+    duration: 3600    # 1 hour
+    input:
+      origin: 1
+      timepoint: "last"
+    modifications:
+      E: 3.3          # EGF (nM)
+      INS: 1721.0     # Insulin (nM)
+
