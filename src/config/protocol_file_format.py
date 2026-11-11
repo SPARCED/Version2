@@ -7,8 +7,9 @@ from enum import StrEnum
 
 # GENERAL SETTINGS
 
-# File format extension
-FILE_EXTENSION = ".yml"
+# File format extensions
+PROTOCOL_FILE_EXTENSION = ".yml"
+RESULTS_FILE_EXTENSION = ".tsv"
 
 # CONTEXT
 

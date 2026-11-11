@@ -6,7 +6,7 @@ from typing import Any
 
 import yaml
 
-from config.protocol_file_format import FILE_EXTENSION
+from config.protocol_file_format import PROTOCOL_FILE_EXTENSION
 
 from validators.path import PathValidator
 
@@ -23,7 +23,7 @@ class ProtocolValidator:
 
     @staticmethod
     def _load(path: str | Path) -> dict[str, Any]:
-        path = PathValidator.file(path, FILE_EXTENSION)
+        path = PathValidator.file(path, PROTOCOL_FILE_EXTENSION)
 
         with path.open("r", encoding="utf-8") as f:
             protocol = yaml.safe_load(f)
