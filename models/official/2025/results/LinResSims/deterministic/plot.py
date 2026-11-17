@@ -20,7 +20,7 @@ experiment = pd.concat([drug_incub, drug_simul], ignore_index=True)
 last_time = experiment["time"].iloc[-1]
 # Load control
 control_incub = pd.read_csv("control_step_1_cell_1.tsv", sep="\t", index_col=0)
-control_simul = pd.read_csv("control_step_3_cell_1.tsv", sep="\t", index_col=0)     # WARNING: edit step consistently
+control_simul = pd.read_csv("control_step_2_cell_1.tsv", sep="\t", index_col=0)     # WARNING: edit step consistently
 control_simul["time"] += incubation_t
 control = pd.concat([control_incub, control_simul], ignore_index=True)
 control = control[control["time"] <= last_time]
@@ -40,10 +40,10 @@ while plot_loop:
         plt.ylabel('Concentration (nM)', fontdict = font_param)
         plt.xlabel('Time (hours)', fontdict = font_param)
         plt.title(compound, fontdict = font_param)
-        plt.xticks(np.arange(0, (last_time/3600)+1, step=2), fontsize=15)
+        plt.xticks(np.arange(0, (last_time/3600)+1, step=0.5), fontsize=15)           # Adjust x-ticks here
         plt.yticks(fontsize=15)
+        plt.savefig(f"plots/{drug}_{compound}.png", format='png', bbox_inches='tight')
         plt.show()
-        plt.savefig(f"plots/{drug}_{compound}", format='png', bbox_inches='tight')
     else:
         plot_loop = False
 
