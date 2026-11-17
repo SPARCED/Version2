@@ -31,10 +31,11 @@ protocol:
   - step: 3
     name: "With cell cycling"
     duration: 86400   # 24 hours
-    intput:
+    input:
       origin: 1
       timepoint: "last"
     modifications:
       E: 3.3          # EGF (nM)
       INS: 1721.0     # Insulin (nM)
       HGF: 0.005      # HGF (nM) ; required to get the cell cycling
+
