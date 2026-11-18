@@ -41,7 +41,10 @@ def run_protocol(protocol: list[SimulationStep], cell_id: int, solver: AbstractS
             # Apply modifications
             simulation.apply_modifications(solver)
             # Run
-            status = simulation.run(cell_id, solver, output_path)
+            try:
+                status = simulation.run(cell_id, solver, output_path)
+            except Exception as e:
+                log.warning(e)
         finally:
             # Reset
             simulation.reset()
