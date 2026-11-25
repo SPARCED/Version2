@@ -11,6 +11,9 @@ from data_storage import DataStorage
 from input_scanner import InputScanner
 from sbml_exporter import SBMLExporter
 
+# Partition
+from partition_sbml import partition_sbml
+
 
 def convert_model(relative_path: str | Path):
     # Retrieve input files paths
@@ -24,6 +27,10 @@ def convert_model(relative_path: str | Path):
     exporter = SBMLExporter(root)
     exporter.to_sbml(model_data)
 
+
 if __name__ == "__main__":
-    convert_model("/official/2027")
+    convert_model("/official/2025")
+    partition_sbml("../../models/official/2025/sparced_2025_linressims_.xml", 
+                   "../../models/official/2025/data/species.tsv",
+                   "../../models/official/2025/")
 
