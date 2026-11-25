@@ -4,7 +4,7 @@
 # AVAILABLE SOLVERS
 
 SOLVERS_REGISTRY = {
-        "bngsim": "solvers.wrappers.bngsim.BNGSimSolver"
+        "bngsim": "solvers.wrappers.bngsim.BNGSimSolver",
         "rover":  "solvers.wrappers.rover.RoverSolver"
         }
 
